@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 5065900014700543173}
   - component: {fileID: -2148065869597897125}
   - component: {fileID: 8337631211157630882}
-  - component: {fileID: 3760430483084352951}
+  - component: {fileID: 3373694615366660347}
   m_Layer: 0
   m_Name: BowlingBall
   m_TagString: Untagged
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c2b97b6b03039b47898484342240946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 3
+  time: 5
 --- !u!54 &8337631211157630882
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -190,7 +190,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3760430483084352951
+--- !u!114 &3373694615366660347
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -292,7 +292,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   m_ThrowVelocityScale: 1.5
-  m_ThrowAngularVelocityScale: 2
+  m_ThrowAngularVelocityScale: 1
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
