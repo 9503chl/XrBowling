@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    [SerializeField] float speed = 10f;
+    [SerializeField] float spawnTime = 5.0f;
+    [SerializeField] GameObject sBall;
     void Start()
     {
-        var velo = speed * transform.forward;
-        var rigidbody = GetComponent<Rigidbody>();
-        rigidbody.AddForce(speed * transform.forward, ForceMode.VelocityChange);
+        
+    }
+    void Update()
+    {
+        if(spawnTime <= 0.0f)
+        {
+            Instantiate(sBall,transform.position ,transform.rotation);
+            spawnTime = 5.0f;
+        }
+        spawnTime -= Time.deltaTime;
     }
 }
