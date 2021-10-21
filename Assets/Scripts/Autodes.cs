@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class Autodes : MonoBehaviour
 {
-    public float time = 5.0f;
-    public bool isCollide = false;
+    float timer1 = 0.0f;
     void Update()
     {
-        if(isCollide) {
-            Destroy(gameObject, time * 2);
-            GameObject.Find("BowlingBall").GetComponent<Ball>().count--;      
-        } else { 
-        Destroy(gameObject, time);
-        GameObject.Find("BowlingBall").GetComponent<Ball>().count--;
+        timer1 += Time.deltaTime;
+        if (timer1 >= 5.0f)
+        {
+            Destroy(gameObject);
+            timer1 = 0.0f;
         }
     }
     void OnCollisionEnter(Collision other)
     {
+        if(other.transform.tag != "Ball" && other.transform.tag != "Spawner") timer1 = -2.0f;
         if (other.transform.tag == "BreakWall") Destroy(gameObject);
     }
 }

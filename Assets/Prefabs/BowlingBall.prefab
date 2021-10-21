@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 8333442581469186100}
   m_Layer: 0
   m_Name: BowlingBall
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -233,8 +233,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c2b97b6b03039b47898484342240946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 5
-  isCollide: 0
 --- !u!114 &8333442581469186100
 MonoBehaviour:
   m_ObjectHideFlags: 0
