@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class DesPin : MonoBehaviour
 {
-    bool isCollide = false;
-    float timer1 = 0.0f;
-    void Update()
-    {
-        if (isCollide && gameObject.transform.rotation.x != 0) timer1 += Time.deltaTime;
-        if (timer1 >= 2.5f) Destroy(gameObject);
-    }
+    public bool isFirst = false;
     void OnCollisionEnter(Collision other)
     {
-        isCollide = true;       
+        Destroy(other.gameObject);
+        isFirst = true;
     }
 }

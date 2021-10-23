@@ -19,6 +19,9 @@ public class Accel : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if (other.transform.tag == "Floor") isMove = true;
+        if (other.transform.tag == "Floor")
+        {
+            isMove = true;
+        }
     }
 }
