@@ -8,34 +8,53 @@ public class CleanUp : MonoBehaviour
     public Transform Target2;
     public Transform Target3;
     public Transform Target4;
-    void FixedUpdate()
+
+    bool sequence1 = false;
+    bool sequence2 = false;
+    bool sequence3 = false;
+    
+    void Update()
     {
         //if (GameObject.Find("BreakWall").GetComponent<DesPin>().isFirst)
         {
+            Debug.Log(sequence1);
             Invoke("FirstM", 0.5f);
-            if (gameObject.transform.position.y - Target1.position.y == 0) SecondM();
-            if (gameObject.transform.position.z - Target2.position.z == 0) ThirdM();
-            if (gameObject.transform.position.y - Target3.position.y == 0) FourthM();
+            if(sequence1) SecondM();
+            if (sequence2) ThirdM();
+            if (sequence3) FourthM();
         }
     }
     void FirstM()
     {
-        transform.position = Vector3.Slerp(transform.position, Target1.position, 10.0f *Time.deltaTime);
-        
+        transform.Translate(Vector3.down * Time.deltaTime);
+        if (gameObject.transform.position.y <= Target1.position.y)
+        {
+            sequence1 = true;
+            return;
+        }
     }
     void SecondM()
     {
-        transform.position = Vector3.Slerp(transform.position, Target2.position, 10.0f * Time.deltaTime);
-        
+        transform.Translate(Vector3.forward * Time.deltaTime);
+        if (gameObject.transform.position.z <= Target2.position.z) 
+        {
+            sequence2 = true;
+            return;
+        }
     }
     void ThirdM()
     {
-        transform.position = Vector3.Slerp(transform.position, Target3.position, 10.0f *Time.deltaTime);
-        
+        transform.Translate(Vector3.up * Time.deltaTime);
+        if (gameObject.transform.position.y <= Target3.position.y && sequence2)
+        {
+            sequence3 = true;
+            return;
+        }
     }
     void FourthM()
     {
-        transform.position = Vector3.Slerp(transform.position, Target4.position, 10.0f* Time.deltaTime);
+        transform.Translate(Vector3.back * Time.deltaTime);
         GameObject.Find("BreakWall").GetComponent<DesPin>().isFirst = false;
+        sequence1 = false; sequence2 = false; sequence3 = false;
     }
 }
