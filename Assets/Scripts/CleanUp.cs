@@ -7,54 +7,42 @@ public class CleanUp : MonoBehaviour
     public Transform Target1;
     public Transform Target2;
     public Transform Target3;
-    public Transform Target4;
-
-    bool sequence1 = false;
-    bool sequence2 = false;
-    bool sequence3 = false;
-    
+    bool Once1 = true, Once2 = true, Once3 = true;
     void Update()
     {
-        //if (GameObject.Find("BreakWall").GetComponent<DesPin>().isFirst)
+        if (GameObject.Find("BreakWall").GetComponent<DesPin>().isFirst)
         {
-            Debug.Log(sequence1);
-            Invoke("FirstM", 0.5f);
-            if(sequence1) SecondM();
-            if (sequence2) ThirdM();
-            if (sequence3) FourthM();
+            if (Once1)
+            {
+                Invoke("FirstM", 1.0f);
+            }
+            if (Vector3.Distance(gameObject.transform.position, Target1.transform.position) <= 0.1f && Once2)
+            {
+                Once1 = false;
+                Invoke("SecondM", 1.0f);
+            }
+            if (Vector3.Distance(gameObject.transform.position, Target2.transform.position) <= 0.1f && Once3)
+            {
+                Once2 = false;
+                Invoke("ThirdM", 1.0f);
+            }
         }
     }
     void FirstM()
     {
-        transform.Translate(Vector3.down * Time.deltaTime);
-        if (gameObject.transform.position.y <= Target1.position.y)
-        {
-            sequence1 = true;
-            return;
-        }
+        transform.position = Vector3.Lerp(transform.position, Target1.position, 10.0f * Time.deltaTime);
+
     }
     void SecondM()
     {
-        transform.Translate(Vector3.forward * Time.deltaTime);
-        if (gameObject.transform.position.z <= Target2.position.z) 
-        {
-            sequence2 = true;
-            return;
-        }
+        transform.position = Vector3.Lerp(transform.position, Target2.position, 3.0f * Time.deltaTime);
+
     }
     void ThirdM()
     {
-        transform.Translate(Vector3.up * Time.deltaTime);
-        if (gameObject.transform.position.y <= Target3.position.y && sequence2)
-        {
-            sequence3 = true;
-            return;
-        }
-    }
-    void FourthM()
-    {
-        transform.Translate(Vector3.back * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, Target3.position, 10.0f * Time.deltaTime);
         GameObject.Find("BreakWall").GetComponent<DesPin>().isFirst = false;
-        sequence1 = false; sequence2 = false; sequence3 = false;
+        Once3 = false;
+        Once1 = true; Once2 = true; Once3 = true;
     }
 }
