@@ -6,34 +6,36 @@ public class MagnetMove : MonoBehaviour
 {
     public Transform Target4;
     public Transform Target5;
-    bool Once = true; bool Once2 = true;
+    bool Once = true; bool Twice = false;
     public bool isMagnetMove = false;
     
     void Update()
     {
-        if (GameObject.Find("BreakWall").GetComponent<DesPin>().isFirst)
+        //if (GameObject.Find("BreakWall").GetComponent<DesPin>().isFirst)
         {
-            if (Once) Invoke("FirstM", 0.5f);
-            if (Vector3.Distance(gameObject.transform.position, Target4.transform.position) <= 0.1f && Once2)
+            if (Once)
             {
-                Invoke("SecondM()", 0.5f);
-                Once = false; 
+                Invoke("FirstM", 0.5f);
             }
-            if (Vector3.Distance(gameObject.transform.position, Target5.transform.position) <= 0.1f && !isMagnetMove)
+            if (Vector3.Distance(gameObject.transform.position, Target4.transform.position) <= 0.1f)
             {
-                Once = true; Once2 = true;
+                Invoke("SecondM", 1.0f); Once = false; Twice = true;
+            }
+            if (Vector3.Distance(gameObject.transform.position, Target5.transform.position) <= 0.1f && Twice)
+            {   
                 isMagnetMove = true;
                 GameObject.Find("BreakWall").GetComponent<DesPin>().isFirst = false;
+                
             }
         }
     }
     void FirstM()
     {
-        transform.position = Vector3.Lerp(transform.position, Target4.position, 10.0f * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, Target4.position, 6.0f * Time.deltaTime);
     }
     void SecondM()
     {
-        transform.position = Vector3.Lerp(transform.position, Target5.position, 10.0f * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, Target5.position, 6.0f * Time.deltaTime);
         
     }
 }
