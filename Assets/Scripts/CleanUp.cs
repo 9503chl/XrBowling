@@ -10,7 +10,7 @@ public class CleanUp : MonoBehaviour
     bool Once1 = true, Once2 = true, Once3 = true;
     void Update()
     {
-        if (GameObject.Find("BreakWall").GetComponent<DesPin>().isFirst)
+        if (GameObject.Find("Marnet").GetComponent<MagnetMove>().isMagnetMove)
         {
             if (Once1)
             {
@@ -25,6 +25,12 @@ public class CleanUp : MonoBehaviour
             {
                 Once2 = false;
                 Invoke("ThirdM", 1.0f);
+            }
+            if (Vector3.Distance(gameObject.transform.position, Target3.transform.position) <= 0.1f && Once3)
+            {
+                GameObject.Find("Marnet").GetComponent<MagnetMove>().isMagnetMove = false;
+                Once3 = false;
+                Once1 = true; Once2 = true; Once3 = true;
             }
         }
     }
@@ -41,8 +47,6 @@ public class CleanUp : MonoBehaviour
     void ThirdM()
     {
         transform.position = Vector3.Lerp(transform.position, Target3.position, 10.0f * Time.deltaTime);
-        GameObject.Find("BreakWall").GetComponent<DesPin>().isFirst = false;
-        Once3 = false;
-        Once1 = true; Once2 = true; Once3 = true;
+        
     }
 }
