@@ -8,6 +8,6 @@ public class DesPin : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
         Destroy(other.gameObject);
-        isFirst = true;
+        if(other.gameObject.tag == "Ball" ) isFirst = true;
     }
 }
