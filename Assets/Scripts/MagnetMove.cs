@@ -12,13 +12,14 @@ public class MagnetMove : MonoBehaviour
     void Update()
     {
         if (GameObject.Find("BreakWall").GetComponent<DesPin>().isFirst)
+
         {
             if (GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone) //두번째
             {
                 Once = true; Twice = false;
                 GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone = false;
             }
-            if (Once)
+            if (Once) //첫번째
             {
                 Invoke("FirstM", 0.5f);
             }
@@ -33,10 +34,11 @@ public class MagnetMove : MonoBehaviour
                     isMagnetMove = true;
                     GameObject.Find("BreakWall").GetComponent<DesPin>().isFirst = false;
                 }
-                else
+                else 
                 {
                     GameObject.Find("BreakWall").GetComponent<DesPin>().isFirst = false;
                     isMagnetMove = false;
+                    GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone = true;
                 }
                 Once = true; Twice = false;
             }
