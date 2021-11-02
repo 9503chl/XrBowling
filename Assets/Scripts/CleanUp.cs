@@ -9,6 +9,7 @@ public class CleanUp : MonoBehaviour
     public Transform Target3;
     bool Once1 = true, Once2 = false, Once3 = false;
     public bool isDone = false;
+
     void Update()
     {
         if (GameObject.Find("Magnet").GetComponent<MagnetMove>().isMagnetMove)
@@ -27,7 +28,7 @@ public class CleanUp : MonoBehaviour
             if (Vector3.Distance(gameObject.transform.position, Target3.transform.position) <= 0.1f && Once3)
             {
                 GameObject.Find("Magnet").GetComponent<MagnetMove>().isMagnetMove = false;
-                Once2 = false; Once3 = false; isDone = true;
+                Once1 = true; Once2 = false; Once3 = false; isDone = true;
             }
         }
     }

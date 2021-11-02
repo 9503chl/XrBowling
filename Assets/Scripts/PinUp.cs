@@ -4,33 +4,38 @@ using UnityEngine;
 
 public class PinUp : MonoBehaviour
 {
-    Vector3 pos;
+    Vector3 pos1;
+    Vector3 pos2;
     Rigidbody rg;
     void Start()
     {
-        pos = transform.position + new Vector3(0, 0.65f, 0);
+        pos1 = transform.position + new Vector3(0, 0.65f, 0);
+        pos2 = transform.position;
         rg = GetComponent<Rigidbody>();
     }
     void Update()
     {
-        if (GameObject.Find("Magnet").GetComponent<MagnetMove>().Twice) //업
+        if (!GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone && GameObject.Find("Magnet").GetComponent<MagnetMove>().Twice) //업
         {
             rg.useGravity = false;
             Invoke("SecondM", 1.0f);
         }
         if (GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone) // 다운
         {
-            rg.useGravity = true;
-            Invoke("FirstM", 1.0f);
+            Invoke("FirstM", 0.5f);
+            Invoke("GravityOn", 1.2f);
         }
     }
     void FirstM()
     {
-        transform.position = Vector3.Lerp(transform.position, pos, 6.0f * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, pos2, 6.0f * Time.deltaTime);
     }
     void SecondM()
     {
-        transform.position = Vector3.Lerp(transform.position, pos, 6.0f * Time.deltaTime);
-
+        transform.position = Vector3.Lerp(transform.position, pos1, 6.0f * Time.deltaTime);
+    }
+    void GravityOn()
+    {
+        rg.useGravity = true;
     }
 }

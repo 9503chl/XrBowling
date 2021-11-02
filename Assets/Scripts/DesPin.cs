@@ -7,7 +7,11 @@ public class DesPin : MonoBehaviour
     public bool isFirst = false;
     void OnCollisionEnter(Collision other)
     {
-        Destroy(other.gameObject);
-        if(other.gameObject.tag == "Ball" ) isFirst = true;
+        if (other.gameObject.tag == "Ball")
+        {
+            isFirst = true;
+            Destroy(other.gameObject,0.5f);
+        }
+        else Destroy(other.gameObject);
     }
 }
