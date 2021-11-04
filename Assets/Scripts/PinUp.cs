@@ -23,7 +23,7 @@ public class PinUp : MonoBehaviour
         if (GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone) // ´Ù¿î
         {
             Invoke("FirstM", 0.5f);
-            Invoke("GravityOn", 1.2f);
+            Invoke("GravityOn", 1.0f);
         }
     }
     void FirstM()
