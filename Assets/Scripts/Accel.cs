@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class Accel : MonoBehaviour
 {
-    private Rigidbody rg;
+    private Transform tr;
     public bool isMove = false;
     
     void Start()
     {
-        rg = GetComponent<Rigidbody>();
+        tr = GetComponent<Transform>();
     }
 
     void Update()
     {
-        if (isMove) rg.velocity = Vector3.forward * 5.0f;
+        if (isMove) tr.transform.Translate(Vector3.forward * Time.deltaTime * 5.0f, Space.World );
     }
 
     void OnCollisionEnter(Collision other)
