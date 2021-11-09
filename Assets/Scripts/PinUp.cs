@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PinUp : MonoBehaviour
 {
-    bool isDown = false;
     Vector3 pos1;
     Vector3 pos2;
     Rigidbody rg;
@@ -14,23 +13,20 @@ public class PinUp : MonoBehaviour
         pos2 = transform.position;
         rg = GetComponent<Rigidbody>();
     }
-    void FixedUpdate()
+    void Update()
     {
-        if (gameObject.transform.rotation.x >= 50 && gameObject.transform.rotation.x <= 310 )
-            isDown = true;
-        if (!isDown)
+        if (gameObject.transform.rotation.x <= 50 && gameObject.transform.rotation.x <= 310) gameObject.GetComponent<PinUp>().enabled = false;
+        if (gameObject.transform.rotation.y <= 50 && gameObject.transform.rotation.y <= 310) gameObject.GetComponent<PinUp>().enabled = false;
+        if (!GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone && GameObject.Find("Magnet").GetComponent<MagnetMove>().Twice) //업
         {
-            if (!GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone && GameObject.Find("Magnet").GetComponent<MagnetMove>().Twice) //업
-            {
-                rg.useGravity = false;
-                Invoke("SecondM", 1.0f);
-            }
-            if (GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone) // 다운
-            {
-                Invoke("FirstM", 0.5f);
-                Invoke("GravityOn", 1.0f);
-            }
+            rg.useGravity = false;
+            Invoke("SecondM", 1.0f);
         }
+        if (GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone) // 다운
+        {
+            Invoke("FirstM", 0.5f);
+            Invoke("GravityOn", 1.0f);
+        }  
     }
     void FirstM()
     {
