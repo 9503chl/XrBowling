@@ -13,10 +13,10 @@ public class PinUp : MonoBehaviour
         pos2 = transform.position;
         rg = GetComponent<Rigidbody>();
     }
-    void Update()
+    void Update() 
     {
-        if (gameObject.transform.rotation.x <= 50 && gameObject.transform.rotation.x <= 310) gameObject.GetComponent<PinUp>().enabled = false;
-        if (gameObject.transform.rotation.y <= 50 && gameObject.transform.rotation.y <= 310) gameObject.GetComponent<PinUp>().enabled = false;
+        //Debug.Log(gameObject.transform.rotation.eulerAngles.x);
+        if (gameObject.transform.rotation.eulerAngles.x > 340 || gameObject.transform.rotation.eulerAngles.x < 7.5) gameObject.GetComponent<PinUp>().enabled = false;
         if (!GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone && GameObject.Find("Magnet").GetComponent<MagnetMove>().Twice) //¾÷
         {
             rg.useGravity = false;
@@ -26,7 +26,7 @@ public class PinUp : MonoBehaviour
         {
             Invoke("FirstM", 0.5f);
             Invoke("GravityOn", 1.0f);
-        }  
+        } 
     }
     void FirstM()
     {
