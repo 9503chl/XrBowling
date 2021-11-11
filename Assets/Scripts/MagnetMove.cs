@@ -6,16 +6,26 @@ public class MagnetMove : MonoBehaviour
 {
     public Transform Target4;
     public Transform Target5;
-    bool Once = true; 
+    public GameObject Pin;
+    GameObject pinClone;
+    public Transform spawnTr;
+    bool Once = true;
+    bool isSpawn = false;
     public bool isMagnetMove = false, Twice = false;
     public int count = 0;
+
+    void Start()
+    {
+        //spawnTr.GetComponent<Transform>();
+        //spawnTr.position = new Vector3(-0.05f, 1.493f, 5.9f);
+    }
     void Update()
     {
-        if (GameObject.Find("BreakWall").GetComponent<DesPin>().isFirst && count < 1) //첫번째
+        if (GameObject.Find("BreakWall").GetComponent<DesPin>().isFirst && count < 2) //첫번째
         {
             if (Once) 
             {
-                Invoke("FirstM", 0.5f);
+                Invoke("FirstM", 0.9f);
             }
             if (Vector3.Distance(gameObject.transform.position, Target4.transform.position) <= 0.1f)
             {
@@ -29,11 +39,11 @@ public class MagnetMove : MonoBehaviour
             }      
         }
 
-        if (GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone && count < 1) //두번째
+        if (GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone && count < 2) //두번째
         {
             if (Once)
             {
-                Invoke("FirstM", 0.5f);
+                Invoke("FirstM", 0.9f);
             }
             if (Vector3.Distance(gameObject.transform.position, Target4.transform.position) <= 0.1f)
             {
@@ -43,14 +53,24 @@ public class MagnetMove : MonoBehaviour
             {
                 Once = true; Twice = false;
                 GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone = false;
-                count++;
             }
         }
         if(count == 3) //공 다지워지고
         {
+            if (!isSpawn) //한번만
+            {
+                Instantiate(Pin, spawnTr.position, spawnTr.rotation);
+                pinClone = GameObject.Find("Pin(Clone)");
+                pinClone.transform.localScale = new Vector3(1f, 1f, 1f);
+                for (int i = 0; i < 10; i++)
+                {
+                    pinClone.transform.GetChild(i).GetComponent<Rigidbody>().useGravity = false;
+                }
+                isSpawn = true;
+            }
             if (Once)
             {
-                Invoke("FirstM", 0.5f);
+                Invoke("FirstM", 0.9f);
             }
             if (Vector3.Distance(gameObject.transform.position, Target4.transform.position) <= 0.1f)
             {
@@ -59,7 +79,7 @@ public class MagnetMove : MonoBehaviour
             if (Vector3.Distance(gameObject.transform.position, Target5.transform.position) <= 0.1f && Twice)
             {
                 Once = true; Twice = false;
-                count++;
+                count = 0; isSpawn = false;
             }
         }
     }

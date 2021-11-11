@@ -10,6 +10,7 @@ public class DesPin : MonoBehaviour
         if (other.gameObject.tag == "Ball")
         {
             isFirst = true;
+            GameObject.Find("Magnet").GetComponent<MagnetMove>().count++;
             Destroy(other.gameObject,0.5f);
         }
         else Destroy(other.gameObject);

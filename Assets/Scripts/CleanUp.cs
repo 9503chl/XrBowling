@@ -14,7 +14,7 @@ public class CleanUp : MonoBehaviour
     {
         if (GameObject.Find("Magnet").GetComponent<MagnetMove>().count == 2) //두번째 시퀀스
         {
-            if (Once1) Invoke("FirstM", 0.5f);
+            if (Once1) Invoke("FirstM", 0.9f);
             if (Vector3.Distance(gameObject.transform.position, Target1.transform.position) <= 0.1f)
             {
                 Once1 = false; Once2 = true;
@@ -33,7 +33,7 @@ public class CleanUp : MonoBehaviour
         }
         if (GameObject.Find("Magnet").GetComponent<MagnetMove>().isMagnetMove) //첫번째 시퀀스
         {
-            if (Once1) Invoke("FirstM", 0.5f);
+            if (Once1) Invoke("FirstM", 0.9f);
             if (Vector3.Distance(gameObject.transform.position, Target1.transform.position) <= 0.1f)
             {
                 Once1 = false; Once2 = true;
