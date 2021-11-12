@@ -12,25 +12,29 @@ public class PinUp : MonoBehaviour
     {
         pos1 = transform.position + new Vector3(0, 0.65f, 0);
         pos2 = transform.position;
-        pos3 = transform.position - new Vector3(0, 1.058f, 0);
+        pos3 = transform.position - new Vector3(0, 0.8f, 0);
         rg = GetComponent<Rigidbody>();
     }
     void Update() 
     {
-        if (gameObject.transform.rotation.eulerAngles.x > 315 || gameObject.transform.rotation.eulerAngles.x < 7.5) gameObject.GetComponent<PinUp>().enabled = false;
+        if (gameObject.transform.rotation.eulerAngles.x > 315 || gameObject.transform.rotation.eulerAngles.x < 7.5)
+        {
+            rg.useGravity = true;
+            gameObject.GetComponent<PinUp>().enabled = false;
+        }
         if (!GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone && GameObject.Find("Magnet").GetComponent<MagnetMove>().Twice) //업
         {
             rg.useGravity = false;
             Invoke("SecondM", 1.0f);
         }
-        if (GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone) // 다운
+        if (GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone && GameObject.Find("Magnet").GetComponent<MagnetMove>().count !=3) // 다운 각도떄문ㅇ ㅔ올라갔을때 꺼지는경우가 있다.
         {
             Invoke("FirstM", 0.9f);
             Invoke("GravityOn", 1.2f);
         } 
         if(GameObject.Find("Magnet").GetComponent<MagnetMove>().count == 3)
         {
-            Invoke("ThirdM", 0.9f);
+            Invoke("ThirdM", 0.5f);
             Invoke("GravityOn", 1.2f);
         }
     }

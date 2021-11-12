@@ -61,22 +61,23 @@ public class MagnetMove : MonoBehaviour
                     pinClone.transform.GetChild(i).GetComponent<Rigidbody>().useGravity = false;
                 }
                 isSpawn = true;
+                GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone = true;
             }
             if (Once)
             {
-                Invoke("FirstM", 0.6f);
-                GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone = true;
+                Invoke("FirstM", 0.5f);
             }
             if (Vector3.Distance(gameObject.transform.position, Target4.transform.position) <= 0.1f)
             {
                 Invoke("SecondM", 1.0f); Once = false; Twice = true;
             }
+
             if (Vector3.Distance(gameObject.transform.position, Target5.transform.position) <= 0.1f && Twice)
             {
-                GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone = false;
                 Once = true; Twice = false;
                 count = 0; isSpawn = false;
                 GameObject.Find("BreakWall").GetComponent<DesPin>().isFirst = false;
+                GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone = false;
             }
         }
     }
