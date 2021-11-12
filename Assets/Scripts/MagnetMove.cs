@@ -13,12 +13,6 @@ public class MagnetMove : MonoBehaviour
     bool isSpawn = false;
     public bool isMagnetMove = false, Twice = false;
     public int count = 0;
-
-    void Start()
-    {
-        //spawnTr.GetComponent<Transform>();
-        //spawnTr.position = new Vector3(-0.05f, 1.493f, 5.9f);
-    }
     void Update()
     {
         if (GameObject.Find("BreakWall").GetComponent<DesPin>().isFirst && count < 2) //첫번째
@@ -55,7 +49,7 @@ public class MagnetMove : MonoBehaviour
                 GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone = false;
             }
         }
-        if(count == 3) //공 다지워지고
+        if(count == 3) //핀 다지워지고
         {
             if (!isSpawn) //한번만
             {
@@ -70,7 +64,8 @@ public class MagnetMove : MonoBehaviour
             }
             if (Once)
             {
-                Invoke("FirstM", 0.9f);
+                Invoke("FirstM", 0.6f);
+                GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone = true;
             }
             if (Vector3.Distance(gameObject.transform.position, Target4.transform.position) <= 0.1f)
             {
@@ -78,8 +73,10 @@ public class MagnetMove : MonoBehaviour
             }
             if (Vector3.Distance(gameObject.transform.position, Target5.transform.position) <= 0.1f && Twice)
             {
+                GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone = false;
                 Once = true; Twice = false;
                 count = 0; isSpawn = false;
+                GameObject.Find("BreakWall").GetComponent<DesPin>().isFirst = false;
             }
         }
     }

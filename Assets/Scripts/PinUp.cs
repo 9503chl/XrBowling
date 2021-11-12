@@ -12,12 +12,12 @@ public class PinUp : MonoBehaviour
     {
         pos1 = transform.position + new Vector3(0, 0.65f, 0);
         pos2 = transform.position;
-        pos3 = transform.position - new Vector3(0, -0.65f, 0); //실패
+        pos3 = transform.position - new Vector3(0, 1.058f, 0);
         rg = GetComponent<Rigidbody>();
     }
     void Update() 
     {
-        if (gameObject.transform.rotation.eulerAngles.x > 340 || gameObject.transform.rotation.eulerAngles.x < 7.5) gameObject.GetComponent<PinUp>().enabled = false;
+        if (gameObject.transform.rotation.eulerAngles.x > 315 || gameObject.transform.rotation.eulerAngles.x < 7.5) gameObject.GetComponent<PinUp>().enabled = false;
         if (!GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone && GameObject.Find("Magnet").GetComponent<MagnetMove>().Twice) //업
         {
             rg.useGravity = false;
@@ -26,7 +26,7 @@ public class PinUp : MonoBehaviour
         if (GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone) // 다운
         {
             Invoke("FirstM", 0.9f);
-            Invoke("GravityOn", 1.0f);
+            Invoke("GravityOn", 1.2f);
         } 
         if(GameObject.Find("Magnet").GetComponent<MagnetMove>().count == 3)
         {
@@ -44,7 +44,7 @@ public class PinUp : MonoBehaviour
     }
     void ThirdM()
     {
-        transform.position = Vector3.Lerp(transform.position, pos3, 6.0f * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, pos3 , 6.0f * Time.deltaTime);
     }
     void GravityOn()
     {
