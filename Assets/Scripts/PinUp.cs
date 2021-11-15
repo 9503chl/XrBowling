@@ -12,24 +12,26 @@ public class PinUp : MonoBehaviour
     {
         pos1 = transform.position + new Vector3(0, 0.65f, 0);
         pos2 = transform.position;
-        pos3 = transform.position - new Vector3(0, 0.8f, 0);
+        pos3 = transform.position - new Vector3(0, 0.65f, 0);
         rg = GetComponent<Rigidbody>();
     }
     void Update() 
     {
-        if (gameObject.transform.rotation.eulerAngles.x > 315 || gameObject.transform.rotation.eulerAngles.x < 7.5)
+        if (gameObject.transform.rotation.eulerAngles.x > 330 || gameObject.transform.rotation.eulerAngles.x < 7.5)
         {
             rg.useGravity = true;
             gameObject.GetComponent<PinUp>().enabled = false;
         }
         if (!GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone && GameObject.Find("Magnet").GetComponent<MagnetMove>().Twice) //업
         {
-            rg.useGravity = false;
+            rg.useGravity = false; gameObject.transform.localEulerAngles = new Vector3(270, 0, 0); //각도 설정
             Invoke("SecondM", 1.0f);
         }
+        
         if (GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone && GameObject.Find("Magnet").GetComponent<MagnetMove>().count !=3) // 다운 각도떄문ㅇ ㅔ올라갔을때 꺼지는경우가 있다.
         {
             Invoke("FirstM", 0.9f);
+            rg.useGravity = false; gameObject.transform.localEulerAngles = new Vector3(270, 0, 0); //각도 설정
             Invoke("GravityOn", 1.2f);
         } 
         if(GameObject.Find("Magnet").GetComponent<MagnetMove>().count == 3)
@@ -53,5 +55,14 @@ public class PinUp : MonoBehaviour
     void GravityOn()
     {
         rg.useGravity = true;
+    }
+    void OnCollisionEnter(Collision other)//충돌하면 위치 재설정
+    {
+        if (other.gameObject.tag == "Ball" || other.gameObject.tag == "Pin")
+        {
+            pos1 = transform.position + new Vector3(0, 0.65f, 0);
+            pos2 = transform.position;
+            pos3 = transform.position - new Vector3(0, 0.8f, 0);
+        }
     }
 }

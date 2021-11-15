@@ -6,12 +6,14 @@ public class MagnetMove : MonoBehaviour
 {
     public Transform Target4;
     public Transform Target5;
+    public Transform spawnTr;
     public GameObject Pin;
     GameObject pinClone;
-    public Transform spawnTr;
+
     bool Once = true;
     bool isSpawn = false;
     public bool isMagnetMove = false, Twice = false;
+
     public int count = 0;
     void Update()
     {
@@ -54,8 +56,7 @@ public class MagnetMove : MonoBehaviour
             if (!isSpawn) //한번만
             {
                 Instantiate(Pin, spawnTr.position, spawnTr.rotation);
-                pinClone = GameObject.Find("Pin(Clone)");
-                pinClone.transform.localScale = new Vector3(1f, 1f, 1f);
+                pinClone = GameObject.Find("Pin(Clone)"); //두번째부터 못찾는다 태그로 찾아보자
                 for (int i = 0; i < 10; i++)
                 {
                     pinClone.transform.GetChild(i).GetComponent<Rigidbody>().useGravity = false;
