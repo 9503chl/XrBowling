@@ -28,15 +28,15 @@ public class PinUp : MonoBehaviour
             Invoke("SecondM", 1.0f);
         }
         
-        if (GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone && GameObject.Find("Magnet").GetComponent<MagnetMove>().count !=3) // 다운 각도떄문ㅇ ㅔ올라갔을때 꺼지는경우가 있다.
+        if (GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone && GameObject.Find("Magnet").GetComponent<MagnetMove>().count !=4) // 다운 각도떄문ㅇ ㅔ올라갔을때 꺼지는경우가 있다.
         {
             Invoke("FirstM", 0.9f);
             rg.useGravity = false; gameObject.transform.localEulerAngles = new Vector3(270, 0, 0); //각도 설정
             Invoke("GravityOn", 1.2f);
         } 
-        if(GameObject.Find("Magnet").GetComponent<MagnetMove>().count == 3)
+        if(GameObject.Find("Magnet").GetComponent<MagnetMove>().count == 4)
         {
-            Invoke("ThirdM", 0.5f);
+            Invoke("ThirdM", 0.9f);
             Invoke("GravityOn", 1.2f);
         }
     }
@@ -62,7 +62,7 @@ public class PinUp : MonoBehaviour
         {
             pos1 = transform.position + new Vector3(0, 0.65f, 0);
             pos2 = transform.position;
-            pos3 = transform.position - new Vector3(0, 0.8f, 0);
+            pos3 = transform.position - new Vector3(0, 0.65f, 0);
         }
     }
 }
