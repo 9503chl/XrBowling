@@ -761,7 +761,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &512724255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1678,7 +1678,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &1309029915
 AudioListener:
   m_ObjectHideFlags: 0
@@ -2612,7 +2612,7 @@ MonoBehaviour:
   Pin: {fileID: 4319559619971646233, guid: fadd6711d7d50a940a00621d1d5b8585, type: 3}
   isMagnetMove: 0
   Twice: 0
-  count: 0
+  count: 3
 --- !u!1 &1822221307
 GameObject:
   m_ObjectHideFlags: 0

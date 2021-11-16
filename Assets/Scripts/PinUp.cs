@@ -36,7 +36,7 @@ public class PinUp : MonoBehaviour
         } 
         if(GameObject.Find("Magnet").GetComponent<MagnetMove>().count == 4)
         {
-            Invoke("ThirdM", 0.9f);
+            Invoke("ThirdM", 1.0f);
             Invoke("GravityOn", 1.2f);
         }
     }

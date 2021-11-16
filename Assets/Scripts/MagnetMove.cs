@@ -65,19 +65,20 @@ public class MagnetMove : MonoBehaviour
             }
             if (Once)
             {
-                Invoke("FirstM", 0.5f);
                 for (int i = 0; i < 10; i++)
                 {
                     pinClone.transform.GetChild(i).transform.localEulerAngles = new Vector3(270, 0, 0);
                 }
+                Invoke("FirstM", 0.05f);
+                
             }
             if (Vector3.Distance(gameObject.transform.position, Target4.transform.position) <= 0.1f)
             {
-                Invoke("SecondM", 1.0f); Once = false; Twice = true;
                 for (int i = 0; i < 10; i++)
                 {
                     pinClone.transform.GetChild(i).transform.localEulerAngles = new Vector3(270, 0, 0);
                 }
+                Invoke("SecondM", 1.0f); Once = false; Twice = true;
             }
 
             if (Vector3.Distance(gameObject.transform.position, Target5.transform.position) <= 0.1f && Twice)
