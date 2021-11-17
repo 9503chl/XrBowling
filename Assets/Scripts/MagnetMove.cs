@@ -18,10 +18,7 @@ public class MagnetMove : MonoBehaviour
     {
         if (GameObject.Find("BreakWall").GetComponent<DesPin>().isFirst && count < 2) //첫번째
         {
-            if (Once) 
-            {
-                Invoke("FirstM", 0.9f);
-            }
+            if (Once) Invoke("FirstM", 0.9f);
             if (Vector3.Distance(gameObject.transform.position, Target4.transform.position) <= 0.1f)
             {
                 Invoke("SecondM", 1.0f); Once = false; Twice = true;
@@ -36,10 +33,7 @@ public class MagnetMove : MonoBehaviour
 
         if (GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone && count < 2) //두번째
         {
-            if (Once)
-            {
-                Invoke("FirstM", 0.9f);
-            }
+            if (Once) Invoke("FirstM", 0.9f);
             if (Vector3.Distance(gameObject.transform.position, Target4.transform.position) <= 0.1f)
             {
                 Invoke("SecondM", 1.0f); Once = false; Twice = true;
@@ -53,38 +47,24 @@ public class MagnetMove : MonoBehaviour
         if(count == 3)
         {
             Destroy(GameObject.FindWithTag("Pin")); //이전거 삭제
-            count++;
             GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone = true;
+            count++;
         }
         if(count == 4) //핀 다지워지고
         {
-            if (GameObject.FindWithTag("Pin") == null) //못 찾으면
+            if (GameObject.FindWithTag("Pin") == null)
             {
-                Instantiate(Pin, spawnTr.position, spawnTr.rotation); //스폰이 안됨
+                Instantiate(Pin, spawnTr.position, spawnTr.rotation); //3으로 시작할땐 스폰이됨
                 pinClone = GameObject.FindWithTag("Pin"); 
             }
-            if (Once)
-            {
-                for (int i = 0; i < 10; i++)
-                {
-                    pinClone.transform.GetChild(i).transform.localEulerAngles = new Vector3(270, 0, 0);
-                }
-                Invoke("FirstM", 0.05f);
-                
-            }
+            if (Once) Invoke("FirstM", 0.145f);
             if (Vector3.Distance(gameObject.transform.position, Target4.transform.position) <= 0.1f)
             {
-                for (int i = 0; i < 10; i++)
-                {
-                    pinClone.transform.GetChild(i).transform.localEulerAngles = new Vector3(270, 0, 0);
-                }
                 Invoke("SecondM", 1.0f); Once = false; Twice = true;
             }
-
             if (Vector3.Distance(gameObject.transform.position, Target5.transform.position) <= 0.1f && Twice)
             {
-                Once = true; Twice = false;
-                count = 0;
+                Once = true; Twice = false; count = 0;
                 GameObject.Find("BreakWall").GetComponent<DesPin>().isFirst = false;
                 GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone = false;
             }
@@ -92,10 +72,10 @@ public class MagnetMove : MonoBehaviour
     }
     void FirstM()
     {
-        transform.position = Vector3.Lerp(transform.position, Target4.position, 6.0f * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, Target4.position, 3.5f * Time.deltaTime);
     }
     void SecondM()
     {
-        transform.position = Vector3.Lerp(transform.position, Target5.position, 6.0f * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, Target5.position, 3.5f * Time.deltaTime);
     }
 }

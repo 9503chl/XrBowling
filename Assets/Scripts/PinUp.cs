@@ -6,13 +6,11 @@ public class PinUp : MonoBehaviour
 {
     Vector3 pos1;
     Vector3 pos2;
-    Vector3 pos3;
     Rigidbody rg;
     void Start()
     {
         pos1 = transform.position + new Vector3(0, 0.65f, 0);
         pos2 = transform.position;
-        pos3 = transform.position - new Vector3(0, 0.65f, 0);
         rg = GetComponent<Rigidbody>();
     }
     void Update() 
@@ -24,20 +22,21 @@ public class PinUp : MonoBehaviour
         }
         if (!GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone && GameObject.Find("Magnet").GetComponent<MagnetMove>().Twice) //업
         {
-            rg.useGravity = false; gameObject.transform.localEulerAngles = new Vector3(270, 0, 0); //각도 설정
-            Invoke("SecondM", 1.0f);
+            rg.useGravity = false; Invoke("SecondM", 1.0f);
         }
-        
-        if (GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone && GameObject.Find("Magnet").GetComponent<MagnetMove>().count !=4) // 다운 각도떄문ㅇ ㅔ올라갔을때 꺼지는경우가 있다.
+        if(Vector3.Distance(gameObject.transform.position, pos1) <= 0.1f) //각도 고정
         {
-            Invoke("FirstM", 0.9f);
+            gameObject.transform.localEulerAngles = new Vector3(270, 0, 0);
+        }
+        if (GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone && GameObject.Find("Magnet").GetComponent<MagnetMove>().count !=4) 
+        {
             rg.useGravity = false; gameObject.transform.localEulerAngles = new Vector3(270, 0, 0); //각도 설정
+            Invoke("FirstM", 0.9f);
             Invoke("GravityOn", 1.2f);
-        } 
-        if(GameObject.Find("Magnet").GetComponent<MagnetMove>().count == 4)
+        }
+        if (Vector3.Distance(gameObject.transform.position, pos2) <= 0.1f) //각도 고정
         {
-            Invoke("ThirdM", 1.0f);
-            Invoke("GravityOn", 1.2f);
+            gameObject.transform.localEulerAngles = new Vector3(270, 0, 0);
         }
     }
     void FirstM()
@@ -47,10 +46,6 @@ public class PinUp : MonoBehaviour
     void SecondM()
     {
         transform.position = Vector3.Lerp(transform.position, pos1, 6.0f * Time.deltaTime);
-    }
-    void ThirdM()
-    {
-        transform.position = Vector3.Lerp(transform.position, pos3 , 6.0f * Time.deltaTime);
     }
     void GravityOn()
     {
@@ -62,7 +57,6 @@ public class PinUp : MonoBehaviour
         {
             pos1 = transform.position + new Vector3(0, 0.65f, 0);
             pos2 = transform.position;
-            pos3 = transform.position - new Vector3(0, 0.65f, 0);
         }
     }
 }

@@ -54,16 +54,13 @@ public class CleanUp : MonoBehaviour
     void FirstM()
     {
         transform.position = Vector3.Lerp(transform.position, Target1.position, 10.0f * Time.deltaTime);
-
     }
     void SecondM()
     {
         transform.position = Vector3.Lerp(transform.position, Target2.position, 3.0f * Time.deltaTime);
-
     }
     void ThirdM()
     {
         transform.position = Vector3.Lerp(transform.position, Target3.position, 8.0f * Time.deltaTime);
-        
     }
 }
