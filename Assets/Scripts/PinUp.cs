@@ -13,8 +13,14 @@ public class PinUp : MonoBehaviour
         pos2 = transform.position;
         rg = GetComponent<Rigidbody>();
     }
-    void Update() 
+    void FixedUpdate() 
     {
+        if (GameObject.Find("BreakWall").GetComponent<DesPin>().isCollide) //위치 조정
+        {
+            pos1 = transform.position;
+            pos2 = transform.position;
+            GameObject.Find("BreakWall").GetComponent<DesPin>().isCollide = false;
+        }
         if (gameObject.transform.rotation.eulerAngles.x > 330 || gameObject.transform.rotation.eulerAngles.x < 7.5)
         {
             rg.useGravity = true;
@@ -22,41 +28,31 @@ public class PinUp : MonoBehaviour
         }
         if (!GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone && GameObject.Find("Magnet").GetComponent<MagnetMove>().Twice) //업
         {
-            rg.useGravity = false; Invoke("SecondM", 1.0f);
+            rg.useGravity = false; Invoke("SecondM", 0.5f);
         }
         if(Vector3.Distance(gameObject.transform.position, pos1) <= 0.1f) //각도 고정
         {
             gameObject.transform.localEulerAngles = new Vector3(270, 0, 0);
+            gameObject.GetComponent<MeshCollider>().isTrigger = true;
         }
-        if (GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone && GameObject.Find("Magnet").GetComponent<MagnetMove>().count !=4) 
+        if (GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone && GameObject.Find("Magnet").GetComponent<MagnetMove>().count !=4) //다운
         {
             rg.useGravity = false; gameObject.transform.localEulerAngles = new Vector3(270, 0, 0); //각도 설정
-            Invoke("FirstM", 0.9f);
+            gameObject.GetComponent<MeshCollider>().isTrigger = false;
+            Invoke("FirstM", 0.5f);
             Invoke("GravityOn", 1.2f);
-        }
-        if (Vector3.Distance(gameObject.transform.position, pos2) <= 0.1f) //각도 고정
-        {
-            gameObject.transform.localEulerAngles = new Vector3(270, 0, 0);
         }
     }
     void FirstM()
     {
-        transform.position = Vector3.Lerp(transform.position, pos2, 6.0f * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, pos2, 50f * Time.deltaTime);
     }
     void SecondM()
     {
-        transform.position = Vector3.Lerp(transform.position, pos1, 6.0f * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, pos1, 50f * Time.deltaTime);
     }
     void GravityOn()
     {
         rg.useGravity = true;
-    }
-    void OnCollisionEnter(Collision other)//충돌하면 위치 재설정
-    {
-        if (other.gameObject.tag == "Ball" || other.gameObject.tag == "Pin")
-        {
-            pos1 = transform.position + new Vector3(0, 0.65f, 0);
-            pos2 = transform.position;
-        }
     }
 }
