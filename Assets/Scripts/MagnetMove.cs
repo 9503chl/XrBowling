@@ -19,11 +19,11 @@ public class MagnetMove : MonoBehaviour
         if (GameObject.Find("BreakWall").GetComponent<DesPin>().isFirst && count < 2) //첫번째
         {
             if (Once) Invoke("FirstM", 0.5f);
-            if (Vector3.Distance(gameObject.transform.position, Target4.transform.position) <= 0.1f)
+            if (Vector3.Distance(gameObject.transform.position, Target4.transform.position) <= 0.05f)
             {
-                Invoke("SecondM", 0.3f); Once = false; Twice = true;
+                Invoke("SecondM", 1.0f); Once = false; Twice = true;
             }
-            if (Vector3.Distance(gameObject.transform.position, Target5.transform.position) <= 0.1f && Twice)
+            if (Vector3.Distance(gameObject.transform.position, Target5.transform.position) <= 0.05f && Twice)
             {
                 isMagnetMove = true;
                 Once = true; Twice = false;
@@ -34,11 +34,11 @@ public class MagnetMove : MonoBehaviour
         if (GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone && count < 2) //두번째
         {
             if (Once) Invoke("FirstM", 0.5f);
-            if (Vector3.Distance(gameObject.transform.position, Target4.transform.position) <= 0.1f)
+            if (Vector3.Distance(gameObject.transform.position, Target4.transform.position) <= 0.05f)
             {
-                Invoke("SecondM", 0.3f); Once = false; Twice = true;
+                Invoke("SecondM", 1.0f); Once = false; Twice = true;
             }
-            if (Vector3.Distance(gameObject.transform.position, Target5.transform.position) <= 0.1f && Twice)
+            if (Vector3.Distance(gameObject.transform.position, Target5.transform.position) <= 0.05f && Twice)
             {
                 Once = true; Twice = false;
                 GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone = false;
@@ -57,12 +57,12 @@ public class MagnetMove : MonoBehaviour
                 Instantiate(Pin, spawnTr.position, spawnTr.rotation); //3으로 시작할땐 스폰이됨
                 pinClone = GameObject.FindWithTag("Pin"); 
             }
-            if (Once) Invoke("FirstM", 0.5f);
-            if (Vector3.Distance(gameObject.transform.position, Target4.transform.position) <= 0.1f)
+            if (Once) Invoke("FirstM", 0.4f);
+            if (Vector3.Distance(gameObject.transform.position, Target4.transform.position) <= 0.05f)
             {
-                Invoke("SecondM", 0.3f); Once = false; Twice = true;
+                Invoke("SecondM", 1.0f); Once = false; Twice = true;
             }
-            if (Vector3.Distance(gameObject.transform.position, Target5.transform.position) <= 0.1f && Twice)
+            if (Vector3.Distance(gameObject.transform.position, Target5.transform.position) <= 0.05f && Twice)
             {
                 Once = true; Twice = false; count = 0;
                 GameObject.Find("BreakWall").GetComponent<DesPin>().isFirst = false;
@@ -72,10 +72,10 @@ public class MagnetMove : MonoBehaviour
     }
     void FirstM()
     {
-        transform.position = Vector3.Lerp(transform.position, Target4.position, 50f * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, Target4.position, 6f * Time.deltaTime);
     }
     void SecondM()
     {
-        transform.position = Vector3.Lerp(transform.position, Target5.position, 50f * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, Target5.position, 6f * Time.deltaTime);
     }
 }
