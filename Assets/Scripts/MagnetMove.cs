@@ -14,6 +14,12 @@ public class MagnetMove : MonoBehaviour
     public bool isMagnetMove = false, Twice = false;
 
     public int count = 0;
+
+#if UNITY_EDITOR
+    int speed = 60;
+#else 
+    int speed = 6;
+#endif
     void FixedUpdate()
     {
         if (GameObject.Find("BreakWall").GetComponent<DesPin>().isFirst && count < 2) //Ã¹¹øÂ°
@@ -72,10 +78,10 @@ public class MagnetMove : MonoBehaviour
     }
     void FirstM()
     {
-        transform.position = Vector3.Lerp(transform.position, Target4.position, 6f * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, Target4.position, speed * Time.deltaTime);
     }
     void SecondM()
     {
-        transform.position = Vector3.Lerp(transform.position, Target5.position, 6f * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, Target5.position, speed * Time.deltaTime);
     }
 }

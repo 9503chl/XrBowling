@@ -10,6 +10,13 @@ public class CleanUp : MonoBehaviour
     bool Once1 = true, Once2 = false, Once3 = false;
     public bool isDone = false;
 
+#if UNITY_EDITOR
+    int speed1 = 100;
+    int speed2 = 80;
+#else 
+    int speed1 = 10;
+    int speed2 = 8;
+#endif
     void FixedUpdate()
     { 
         if (GameObject.Find("Magnet").GetComponent<MagnetMove>().isMagnetMove) //첫번째 시퀀스 고장남
@@ -53,14 +60,14 @@ public class CleanUp : MonoBehaviour
     }
     void FirstM()
     {
-        transform.position = Vector3.Lerp(transform.position, Target1.position, 10f * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, Target1.position, speed1 * Time.deltaTime);
     }
     void SecondM()
     {
-        transform.position = Vector3.Lerp(transform.position, Target2.position, 8f * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, Target2.position, speed2 * Time.deltaTime);
     }
     void ThirdM()
     {
-        transform.position = Vector3.Lerp(transform.position, Target3.position, 10f * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, Target3.position, speed1 * Time.deltaTime);
     }
 }
