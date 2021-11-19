@@ -7,6 +7,7 @@ public class PinUp : MonoBehaviour
     Vector3 pos1;
     Vector3 pos2;
     Rigidbody rg;
+    public int sCount = 0;
     void Start()
     {
         pos1 = transform.position;
@@ -15,9 +16,11 @@ public class PinUp : MonoBehaviour
     }
     void FixedUpdate()
     {
+        Debug.Log(sCount);
         if (gameObject.transform.rotation.eulerAngles.x > 330 || gameObject.transform.rotation.eulerAngles.x < 7.5)
-        {
+        { // 쓰러지면
             rg.useGravity = true; gameObject.GetComponent<Rigidbody>().isKinematic = false;
+            sCount++;
             gameObject.GetComponent<PinUp>().enabled = false;
         }
         if (!GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone && GameObject.Find("Magnet").GetComponent<MagnetMove>().Twice) //업

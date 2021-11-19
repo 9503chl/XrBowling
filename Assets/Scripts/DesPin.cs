@@ -13,6 +13,7 @@ public class DesPin : MonoBehaviour
             isFirst = true; isCollide = true;
             GameObject.Find("Magnet").GetComponent<MagnetMove>().count++;
             Destroy(other.gameObject, 0.5f);
+            //GameObject.Find("").GetComponent<Score>().tCount++;
         }
         else Destroy(other.gameObject);
     }
