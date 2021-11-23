@@ -24,7 +24,7 @@ public class PinUp : MonoBehaviour
         if (gameObject.transform.rotation.eulerAngles.x > 330 || gameObject.transform.rotation.eulerAngles.x < 7.5)
         { // 쓰러지면
             rg.useGravity = true; gameObject.GetComponent<Rigidbody>().isKinematic = false;
-            GameObject.Find("ScoreBoard").GetComponent<Score>().sCount++;
+            GameObject.Find("Score").GetComponent<Score>().sCount++;
             gameObject.GetComponent<PinUp>().enabled = false;
         }
         if (!GameObject.Find("CoverWall").GetComponent<CleanUp>().isDone && GameObject.Find("Magnet").GetComponent<MagnetMove>().Twice) //업
