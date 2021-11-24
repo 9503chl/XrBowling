@@ -7,7 +7,7 @@ public class ScoreText : MonoBehaviour
  
     void FixedUpdate()
     {
-        if (GameObject.Find("Score").GetComponent<Score>().turnEnd) //1,2번쨰 애들이 실행이 안된다.
+        if (GameObject.Find("Score").GetComponent<Score>().turnEnd) //1,2번째 애들이 실행이 안된다.
         {
             if (gameObject.name == "ScoreBoard")
             {
@@ -15,6 +15,7 @@ public class ScoreText : MonoBehaviour
                 for(int i =0; i<10; i++)
                 {
                     str += GameObject.Find("Score").GetComponent<Score>().PointNow[i,0].ToString();
+                    str += " | ";
                 }
                 gameObject.GetComponent<TextMesh>().text = str;
                 GameObject.Find("Score").GetComponent<Score>().turnEnd = false;
@@ -25,6 +26,7 @@ public class ScoreText : MonoBehaviour
                 for (int i = 0; i < 10; i++)
                 {
                     str += GameObject.Find("Score").GetComponent<Score>().PointNow[i, 1].ToString();
+                    str += " | ";
                 }
                 gameObject.GetComponent<TextMesh>().text = str;
                 GameObject.Find("Score").GetComponent<Score>().turnEnd = false;
@@ -35,6 +37,7 @@ public class ScoreText : MonoBehaviour
                 for (int i = 0; i < 10; i++)
                 {
                     str += GameObject.Find("Score").GetComponent<Score>().PointNow[i, 2].ToString();
+                    str += " | ";
                 }
                 gameObject.GetComponent<TextMesh>().text = str;
                 GameObject.Find("Score").GetComponent<Score>().turnEnd = false;

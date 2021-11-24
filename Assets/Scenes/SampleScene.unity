@@ -3025,6 +3025,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFirst: 0
   isCollide: 0
+  isStart: 1
 --- !u!1 &1940558532
 GameObject:
   m_ObjectHideFlags: 0

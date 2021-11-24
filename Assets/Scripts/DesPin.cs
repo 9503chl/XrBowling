@@ -11,7 +11,7 @@ public class DesPin : MonoBehaviour
     {
         if (other.gameObject.tag == "Ball")
         {
-            isFirst = true; isCollide = true; isStart = true;
+            isFirst = true; isCollide = true; isStart = true; //스타트가 안켜진다.
             GameObject.Find("Magnet").GetComponent<MagnetMove>().count++;
             Destroy(other.gameObject, 0.5f);
             GameObject.Find("Score").GetComponent<Score>().tCount++;
