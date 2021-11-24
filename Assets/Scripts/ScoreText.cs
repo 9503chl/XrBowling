@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class ScoreText : MonoBehaviour
 {
- 
+    int count = 0;
     void FixedUpdate()
     {
-        if (GameObject.Find("Score").GetComponent<Score>().turnEnd) //1,2번째 애들이 실행이 안된다.
+        if(count == 3)
+        {
+            GameObject.Find("Score").GetComponent<Score>().turnEnd = false;
+            count = 0;
+        }
+        if (GameObject.Find("Score").GetComponent<Score>().turnEnd) 
         {
             if (gameObject.name == "ScoreBoard")
             {
@@ -18,7 +23,7 @@ public class ScoreText : MonoBehaviour
                     str += " | ";
                 }
                 gameObject.GetComponent<TextMesh>().text = str;
-                GameObject.Find("Score").GetComponent<Score>().turnEnd = false;
+                count++;
             }
             else if (gameObject.name == "ScoreBoard1")
             {
@@ -29,9 +34,9 @@ public class ScoreText : MonoBehaviour
                     str += " | ";
                 }
                 gameObject.GetComponent<TextMesh>().text = str;
-                GameObject.Find("Score").GetComponent<Score>().turnEnd = false;
+                count++;
             }
-            else if (gameObject.name == "ScoreBoard2") //얘만됨
+            else if (gameObject.name == "ScoreBoard2") 
             {
                 string str = "";
                 for (int i = 0; i < 10; i++)
@@ -40,7 +45,7 @@ public class ScoreText : MonoBehaviour
                     str += " | ";
                 }
                 gameObject.GetComponent<TextMesh>().text = str;
-                GameObject.Find("Score").GetComponent<Score>().turnEnd = false;
+                count++;
             }
         }
     }
