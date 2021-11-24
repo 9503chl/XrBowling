@@ -1,49 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-[RequireComponent(typeof(Text))]
 public class ScoreText : MonoBehaviour
 {
-    Text uiText;
-   
-    void Start()
+ 
+    void FixedUpdate()
     {
-        uiText = GetComponent<Text>();
-    }
-    void Update()
-    {
-        if (GameObject.Find("Score").GetComponent<Score>().turnEnd) //턴종료후 실행이 안된다.
+        if (GameObject.Find("Score").GetComponent<Score>().turnEnd) //1,2번쨰 애들이 실행이 안된다.
         {
             if (gameObject.name == "ScoreBoard")
             {
-                string str = null;
+                string str = "";
                 for(int i =0; i<10; i++)
                 {
-                    str.Insert(i, GameObject.Find("Score").GetComponent<Score>().PointNow[i,0].ToString());
+                    str += GameObject.Find("Score").GetComponent<Score>().PointNow[i,0].ToString();
                 }
-                uiText.text = string.Format(str);
+                gameObject.GetComponent<TextMesh>().text = str;
                 GameObject.Find("Score").GetComponent<Score>().turnEnd = false;
             }
             else if (gameObject.name == "ScoreBoard1")
             {
-                string str = null;
+                string str = "";
                 for (int i = 0; i < 10; i++)
                 {
-                    str.Insert(i, GameObject.Find("Score").GetComponent<Score>().PointNow[i, 1].ToString());
+                    str += GameObject.Find("Score").GetComponent<Score>().PointNow[i, 1].ToString();
                 }
-                uiText.text = string.Format(str);
+                gameObject.GetComponent<TextMesh>().text = str;
                 GameObject.Find("Score").GetComponent<Score>().turnEnd = false;
             }
-            else if (gameObject.name == "ScoreBoard2")
+            else if (gameObject.name == "ScoreBoard2") //얘만됨
             {
-                string str = null;
+                string str = "";
                 for (int i = 0; i < 10; i++)
                 {
-                    str.Insert(i, GameObject.Find("Score").GetComponent<Score>().PointNow[i, 2].ToString());
+                    str += GameObject.Find("Score").GetComponent<Score>().PointNow[i, 2].ToString();
                 }
-                uiText.text = string.Format(str);
+                gameObject.GetComponent<TextMesh>().text = str;
                 GameObject.Find("Score").GetComponent<Score>().turnEnd = false;
             }
         }
