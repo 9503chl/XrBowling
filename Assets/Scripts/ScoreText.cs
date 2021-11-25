@@ -16,33 +16,33 @@ public class ScoreText : MonoBehaviour
         {
             if (gameObject.name == "ScoreBoard")
             {
-                string str = "";
+                string str = "|";
                 for(int i =0; i<10; i++)
                 {
-                    str += GameObject.Find("Score").GetComponent<Score>().PointNow[i,0].ToString();
-                    str += " | ";
+                    str += GameObject.Find("Score").GetComponent<Score>().PointNow[i,0];
+                    str += "|";
                 }
                 gameObject.GetComponent<TextMesh>().text = str;
                 count++;
             }
             else if (gameObject.name == "ScoreBoard1")
             {
-                string str = "";
+                string str = "|";
                 for (int i = 0; i < 10; i++)
                 {
-                    str += GameObject.Find("Score").GetComponent<Score>().PointNow[i, 1].ToString();
-                    str += " | ";
+                    str += GameObject.Find("Score").GetComponent<Score>().PointNow[i, 1];
+                    str += "|";
                 }
                 gameObject.GetComponent<TextMesh>().text = str;
                 count++;
             }
             else if (gameObject.name == "ScoreBoard2") 
             {
-                string str = "";
+                string str = "|";
                 for (int i = 0; i < 10; i++)
                 {
-                    str += GameObject.Find("Score").GetComponent<Score>().PointNow[i, 2].ToString();
-                    str += " | ";
+                    str += GameObject.Find("Score").GetComponent<Score>().PointNow[i, 2];
+                    str += "|";
                 }
                 gameObject.GetComponent<TextMesh>().text = str;
                 count++;
