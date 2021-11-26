@@ -48,9 +48,9 @@ public class Score : MonoBehaviour
                 GameObject.Find("BreakWall").GetComponent<DesPin>().isStart = false;
             }
 
-            if (sCount == 0) 
+            if (sCount == 0) //0Á¡
             {
-                PointNow[round, tCount] = "-";
+                PointNow[round, tCount-1] = "-"; turnEnd = true;
                 GameObject.Find("BreakWall").GetComponent<DesPin>().isStart = false;
             }
 
@@ -70,7 +70,7 @@ public class Score : MonoBehaviour
             {
                 if (round == 0) PointNow[round, 2] += beforeScore + sCount;
                 else PointNow[round, 2] += int.Parse(PointNow[round - 1, 2]) + beforeScore + sCount;
-                PointNow[round, 1] += sCount;
+                if(sCount != 0) PointNow[round, 1] += sCount;
                 round++; tCount = 0; turnEnd = true; beforeScore = 0; sCount = 0;
                 GameObject.Find("BreakWall").GetComponent<DesPin>().isStart = false;
             }
