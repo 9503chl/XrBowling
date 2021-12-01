@@ -14,7 +14,11 @@ public class Accel : MonoBehaviour
 
     void Update()
     {
-        if (isMove) tr.transform.Translate(Vector3.forward * Time.deltaTime * 5.0f, Space.World );
+        if (isMove)
+        {
+            tr.transform.Translate(Vector3.forward * Time.deltaTime * 5.0f, Space.World);
+            tr.transform.Rotate(10, 0, 0);
+        }
     }
 
     void OnCollisionEnter(Collision other)
