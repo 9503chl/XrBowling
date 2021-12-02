@@ -16,7 +16,9 @@ public class DesPin : MonoBehaviour
             Invoke("tCountUp", 2.0f); //세는 시간을 주자
             GameObject.Find("Magnet").GetComponent<MagnetMove>().count++;
             Destroy(other.gameObject, 0.5f);
-            
+            GameObject.FindWithTag("Ball").GetComponent<Accel>().isLeft = false;
+            GameObject.FindWithTag("Ball").GetComponent<Accel>().isRight = false;
+            GameObject.FindWithTag("Ball").GetComponent<Accel>().isbuttonDown = false;
         }
         else Destroy(other.gameObject);
     }

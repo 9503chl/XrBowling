@@ -26,8 +26,7 @@ public class Score : MonoBehaviour
                 PointNow[round, 0] = "X";
                 if (round == 0)
                 {
-                    int a = int.Parse(PointNow[round, 2]);
-                    PointNow[round, 2] += a + 30;
+                    PointNow[round, 2] += 30;
                 }
                 else
                 {
