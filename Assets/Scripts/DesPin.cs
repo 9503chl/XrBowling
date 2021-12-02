@@ -19,6 +19,7 @@ public class DesPin : MonoBehaviour
             GameObject.FindWithTag("Ball").GetComponent<Accel>().isLeft = false;
             GameObject.FindWithTag("Ball").GetComponent<Accel>().isRight = false;
             GameObject.FindWithTag("Ball").GetComponent<Accel>().isbuttonDown = false;
+            GameObject.FindWithTag("Dump").GetComponent<Dump>().isDumped = false;
         }
         else Destroy(other.gameObject);
     }

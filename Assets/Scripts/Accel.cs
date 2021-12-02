@@ -10,6 +10,7 @@ public class Accel : MonoBehaviour
     public bool isRight = false;
     public bool isbuttonDown = false;
     float speed = 0.0f;
+    public float time = 0.0f;
     void Start()
     {
         tr = GetComponent<Transform>();
@@ -17,23 +18,52 @@ public class Accel : MonoBehaviour
 
     void Update()
     {
-        speed = Mathf.Clamp(speed,0, 0.12f);
-        speed += Time.deltaTime;
         if (isMove)
         {
-            if (isLeft)
+            speed = Mathf.Clamp(speed, 0, 0.15f);
+            speed += Time.deltaTime;
+            time += Time.deltaTime; //움직인 시간
+            if (isLeft && !GameObject.FindWithTag("Dump").GetComponent<Dump>().isDumped) //도착까지 2.5초
             {
-                tr.transform.Translate(new Vector3(-speed, 0, 1) * Time.deltaTime * 5.0f, Space.World); 
-                tr.transform.Rotate(10, -10f, 10);
+                if(time <= 1.24f)
+                {
+                    tr.transform.Translate(new Vector3(speed * 1.3f, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World); //속도조정 필요
+                    tr.transform.Rotate(10, 10f, 10);
+                }
+                
+                else if(time <= 1.26f)
+                {
+                    tr.transform.Translate(Vector3.forward * 0.8f * Time.deltaTime * 5.0f, Space.World);
+                    tr.transform.Rotate(10, 0, 0);
+                }
+                else if (time <= 2.5f)
+                {
+                    tr.transform.Translate(new Vector3(-speed, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World);
+                    tr.transform.Rotate(10, -10f, 10);
+                }
             }
-            else if (isRight)
+            else if (isRight && !GameObject.FindWithTag("Dump").GetComponent<Dump>().isDumped)
             {
-                tr.transform.Translate(new Vector3(speed,0,1) * Time.deltaTime * 5.0f, Space.World);
-                tr.transform.Rotate(10, 10f, 10);
+                if (time <= 1.24f)
+                {
+                    tr.transform.Translate(new Vector3(-speed, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World);
+                    tr.transform.Rotate(10, -10f, 10);
+                }
+
+                else if (time <= 1.26f)
+                {
+                    tr.transform.Translate(Vector3.forward * 0.8f * Time.deltaTime * 5.0f, Space.World);
+                    tr.transform.Rotate(10, 0, 0);
+                }
+                else if (time <= 2.5f)
+                {
+                    tr.transform.Translate(new Vector3(speed * 1.3f, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World);
+                    tr.transform.Rotate(10, 10f, 10);
+                }
             }
             else
             {
-                tr.transform.Translate(Vector3.forward * Time.deltaTime * 5.0f, Space.World);
+                tr.transform.Translate(Vector3.forward *0.8f * Time.deltaTime * 5.0f, Space.World);
                 tr.transform.Rotate(10, 0, 0);
             }
         }
