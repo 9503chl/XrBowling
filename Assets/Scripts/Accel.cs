@@ -27,7 +27,7 @@ public class Accel : MonoBehaviour
             {
                 if(time <= 1.24f)
                 {
-                    tr.transform.Translate(new Vector3(speed * 1.3f, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World); //속도조정 필요
+                    tr.transform.Translate(new Vector3(speed * 0.9f , 0, 0.8f) * Time.deltaTime * 5.0f, Space.World); //속도조정 필요
                     tr.transform.Rotate(10, 10f, 10);
                 }
                 
@@ -38,7 +38,7 @@ public class Accel : MonoBehaviour
                 }
                 else if (time <= 2.5f)
                 {
-                    tr.transform.Translate(new Vector3(-speed, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World);
+                    tr.transform.Translate(new Vector3(-speed*0.7f, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World);
                     tr.transform.Rotate(10, -10f, 10);
                 }
             }
@@ -46,7 +46,7 @@ public class Accel : MonoBehaviour
             {
                 if (time <= 1.24f)
                 {
-                    tr.transform.Translate(new Vector3(-speed, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World);
+                    tr.transform.Translate(new Vector3(-speed * 0.9f, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World);
                     tr.transform.Rotate(10, -10f, 10);
                 }
 
@@ -57,7 +57,7 @@ public class Accel : MonoBehaviour
                 }
                 else if (time <= 2.5f)
                 {
-                    tr.transform.Translate(new Vector3(speed * 1.3f, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World);
+                    tr.transform.Translate(new Vector3(speed * 0.7f, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World);
                     tr.transform.Rotate(10, 10f, 10);
                 }
             }
@@ -102,7 +102,6 @@ public class Accel : MonoBehaviour
             }
         }
  }
-
     void OnCollisionEnter(Collision other)
     {
         if (other.transform.tag == "Floor")

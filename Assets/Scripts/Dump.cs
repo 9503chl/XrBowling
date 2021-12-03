@@ -7,6 +7,6 @@ public class Dump : MonoBehaviour
     public bool isDumped = false;
     private void OnTriggerEnter(Collider other)
     {
-        isDumped = true;
+        if(other.tag=="Ball") isDumped = true;
     }
 }
