@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class Accel : MonoBehaviour
 {
     private Transform tr;
+    public XRController controller = null;
     public bool isMove = false;
     public bool isLeft = false;
     public bool isRight = false;
@@ -16,7 +19,7 @@ public class Accel : MonoBehaviour
         tr = GetComponent<Transform>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (isMove)
         {
@@ -25,46 +28,46 @@ public class Accel : MonoBehaviour
             time += Time.deltaTime; //움직인 시간
             if (isLeft && !GameObject.FindWithTag("Dump").GetComponent<Dump>().isDumped) //도착까지 2.5초
             {
-                if(time <= 1.24f)
+                if(time <= 1.25f)
                 {
-                    tr.transform.Translate(new Vector3(speed * 0.9f , 0, 0.8f) * Time.deltaTime * 5.0f, Space.World); //속도조정 필요
-                    tr.transform.Rotate(10, 10f, 10);
+                    tr.transform.Translate(new Vector3(speed * 0.7f , 0, 0.8f) * Time.deltaTime * 5.0f, Space.World); 
+                    tr.transform.Rotate(20f, 20f, 20);
                 }
                 
-                else if(time <= 1.26f)
+                else if(time <= 1.35f)
                 {
-                    tr.transform.Translate(Vector3.forward * 0.8f * Time.deltaTime * 5.0f, Space.World);
-                    tr.transform.Rotate(10, 0, 0);
+                    tr.transform.Translate(new Vector3(-speed * 0.7f, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World);
+                    tr.transform.Rotate(20f, 20f, 20);
                 }
                 else if (time <= 2.5f)
                 {
-                    tr.transform.Translate(new Vector3(-speed*0.7f, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World);
-                    tr.transform.Rotate(10, -10f, 10);
+                    tr.transform.Translate(new Vector3(-speed*1.35f, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World);
+                    tr.transform.Rotate(20f, 20f, 20);
                 }
             }
             else if (isRight && !GameObject.FindWithTag("Dump").GetComponent<Dump>().isDumped)
             {
-                if (time <= 1.24f)
+                if (time <= 1.25f)
                 {
-                    tr.transform.Translate(new Vector3(-speed * 0.9f, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World);
-                    tr.transform.Rotate(10, -10f, 10);
+                    tr.transform.Translate(new Vector3(-speed * 0.7f, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World);
+                    tr.transform.Rotate(20f, -20f, 20);
                 }
 
-                else if (time <= 1.26f)
+                else if (time <= 1.35f)
                 {
-                    tr.transform.Translate(Vector3.forward * 0.8f * Time.deltaTime * 5.0f, Space.World);
-                    tr.transform.Rotate(10, 0, 0);
+                    tr.transform.Translate(new Vector3(-speed * 0.7f, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World);
+                    tr.transform.Rotate(20f, -20f, 20);
                 }
                 else if (time <= 2.5f)
                 {
-                    tr.transform.Translate(new Vector3(speed * 0.7f, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World);
-                    tr.transform.Rotate(10, 10f, 10);
+                    tr.transform.Translate(new Vector3(speed * 1.35f, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World);
+                    tr.transform.Rotate(20f, -20f, 20);
                 }
             }
             else
             {
                 tr.transform.Translate(Vector3.forward *0.8f * Time.deltaTime * 5.0f, Space.World);
-                tr.transform.Rotate(10, 0, 0);
+                tr.transform.Rotate(20, 0, 0);
             }
         }
 #if UNITY_EDITOR
@@ -85,7 +88,7 @@ public class Accel : MonoBehaviour
             }
         }
 #endif
-        if (OVRInput.GetDown(OVRInput.RawButton.B))
+        if (controller.inputDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out bool secondry))//B
         {
             if (!isbuttonDown)
             {
@@ -93,8 +96,8 @@ public class Accel : MonoBehaviour
                 isbuttonDown = true;
             }
         }
-        if (OVRInput.GetDown(OVRInput.RawButton.A))
-        {
+        if (controller.inputDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool primary)) //A
+            {
             if (!isbuttonDown)
             {
                 isRight = true;

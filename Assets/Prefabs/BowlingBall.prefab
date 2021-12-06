@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43f9ea1e3d553b94386a5c75fc5ea019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 7308816442091271785, guid: 2862abb64fe1c3447b46b07ee665e953, type: 3}
   isMove: 0
   isLeft: 0
   isRight: 0
