@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Dump : MonoBehaviour
 {
-    public bool isDumped = false;
-    private void OnTriggerEnter(Collider other)
+    public int dumpCount = 0;
+    void OnCollisionEnter(Collision other)
     {
-        if(other.tag=="Ball") isDumped = true;
+        if (other.transform.tag == "Ball") dumpCount++;
     }
 }
