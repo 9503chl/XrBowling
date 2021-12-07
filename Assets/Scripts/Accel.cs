@@ -20,7 +20,7 @@ public class Accel : MonoBehaviour
             speed = Mathf.Clamp(speed, 0, 0.15f);
             speed += Time.deltaTime;
             time += Time.deltaTime; //움직인 시간
-            if (GameObject.Find("hall").GetComponent<Dump>().dumpCount == 0 && GameObject.Find("hall2").GetComponent<Dump>().dumpCount == 0) //도착까지 2.5초
+            if (GameObject.Find("Text").GetComponent<PlayerInput>().isLeft &&GameObject.Find("hall").GetComponent<Dump>().dumpCount == 0 && GameObject.Find("hall2").GetComponent<Dump>().dumpCount == 0) //도착까지 2.5초
             {
                 if (time <= 1.25f)
                 {
@@ -38,7 +38,7 @@ public class Accel : MonoBehaviour
                     tr.transform.Rotate(20f, 20f, 20);
                 }
             }
-            else if (GameObject.Find("hall").GetComponent<Dump>().dumpCount == 0 && GameObject.Find("hall2").GetComponent<Dump>().dumpCount == 0)
+            else if (GameObject.Find("Text").GetComponent<PlayerInput>().isRight && GameObject.Find("hall").GetComponent<Dump>().dumpCount == 0 && GameObject.Find("hall2").GetComponent<Dump>().dumpCount == 0)
             {
                 if (time <= 1.25f)
                 {
@@ -68,7 +68,7 @@ public class Accel : MonoBehaviour
         if (other.transform.tag == "Floor")
         {
             isMove = true;
-            GameObject.Find("XR Rig").GetComponent<PlayerInput>().isMove = true;
+            GameObject.Find("Text").GetComponent<PlayerInput>().isMove = true;
         }
     }
 }
