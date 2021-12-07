@@ -8,6 +8,7 @@ public class Accel : MonoBehaviour
     private Transform tr;
     public bool isMove = false;
     float speed = 0.0f;
+    int Angle = 0;
     public float time = 0.0f;
     void Start()
     {
@@ -19,23 +20,25 @@ public class Accel : MonoBehaviour
         {
             speed = Mathf.Clamp(speed, 0, 0.15f);
             speed += Time.deltaTime;
+            Angle += 20;
+            if (Angle >= 360) Angle = 0;
             time += Time.deltaTime; //움직인 시간
             if (GameObject.Find("Text").GetComponent<PlayerInput>().isLeft &&GameObject.Find("hall").GetComponent<Dump>().dumpCount == 0 && GameObject.Find("hall2").GetComponent<Dump>().dumpCount == 0) //도착까지 2.5초
             {
                 if (time <= 1.25f)
                 {
                     tr.transform.Translate(new Vector3(speed * 0.7f, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World);
-                    tr.transform.Rotate(20f, 20f, 20);
+                    tr.transform.rotation = Quaternion.Euler(Angle, 0, Angle);
                 }
                 else if (time <= 1.35f)
                 {
                     tr.transform.Translate(new Vector3(-speed * 0.7f, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World);
-                    tr.transform.Rotate(20f, 20f, 20);
+                    tr.transform.rotation = Quaternion.Euler(Angle, 0, Angle);
                 }
                 else if (time <= 2.5f)
                 {
                     tr.transform.Translate(new Vector3(-speed * 1.35f, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World);
-                    tr.transform.Rotate(20f, 20f, 20);
+                    tr.transform.rotation = Quaternion.Euler(Angle, 0, Angle);
                 }
             }
             else if (GameObject.Find("Text").GetComponent<PlayerInput>().isRight && GameObject.Find("hall").GetComponent<Dump>().dumpCount == 0 && GameObject.Find("hall2").GetComponent<Dump>().dumpCount == 0)
@@ -43,23 +46,23 @@ public class Accel : MonoBehaviour
                 if (time <= 1.25f)
                 {
                     tr.transform.Translate(new Vector3(-speed * 0.7f, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World);
-                    tr.transform.Rotate(20f, -20f, 20);
+                    tr.transform.rotation = Quaternion.Euler(Angle, -Angle, Angle);
                 }
                 else if (time <= 1.35f)
                 {
                     tr.transform.Translate(new Vector3(-speed * 0.7f, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World);
-                    tr.transform.Rotate(20f, -20f, 20);
+                    tr.transform.rotation = Quaternion.Euler(Angle, -Angle, Angle);
                 }
                 else if (time <= 2.5f)
                 {
                     tr.transform.Translate(new Vector3(speed * 1.35f, 0, 0.8f) * Time.deltaTime * 5.0f, Space.World);
-                    tr.transform.Rotate(20f, -20f, 20);
+                    tr.transform.rotation = Quaternion.Euler(Angle, -Angle, Angle);
                 }
             }
             else
             {
                 tr.transform.Translate(Vector3.forward * 0.8f * Time.deltaTime * 5.0f, Space.World);
-                tr.transform.Rotate(20, 0, 0);
+                tr.transform.rotation = Quaternion.Euler(Angle, 0, 0);
             }
         }
     }
