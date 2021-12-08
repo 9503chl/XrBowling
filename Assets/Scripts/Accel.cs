@@ -23,7 +23,7 @@ public class Accel : MonoBehaviour
             Angle += 20;
             if (Angle >= 360) Angle = 0;
             time += Time.deltaTime; //움직인 시간
-            if (GameObject.Find("Text").GetComponent<PlayerInput>().isLeft &&GameObject.Find("hall").GetComponent<Dump>().dumpCount == 0 && GameObject.Find("hall2").GetComponent<Dump>().dumpCount == 0) //도착까지 2.5초
+            if (GameObject.Find("XR Rig").GetComponent<PlayerInput>().isLeft &&GameObject.Find("hall").GetComponent<Dump>().dumpCount == 0 && GameObject.Find("hall2").GetComponent<Dump>().dumpCount == 0) //도착까지 2.5초
             {
                 if (time <= 1.25f)
                 {
@@ -41,7 +41,7 @@ public class Accel : MonoBehaviour
                     tr.transform.rotation = Quaternion.Euler(Angle, 0, Angle);
                 }
             }
-            else if (GameObject.Find("Text").GetComponent<PlayerInput>().isRight && GameObject.Find("hall").GetComponent<Dump>().dumpCount == 0 && GameObject.Find("hall2").GetComponent<Dump>().dumpCount == 0)
+            else if (GameObject.Find("XR Rig").GetComponent<PlayerInput>().isRight && GameObject.Find("hall").GetComponent<Dump>().dumpCount == 0 && GameObject.Find("hall2").GetComponent<Dump>().dumpCount == 0)
             {
                 if (time <= 1.25f)
                 {
@@ -71,7 +71,7 @@ public class Accel : MonoBehaviour
         if (other.transform.tag == "Floor")
         {
             isMove = true;
-            GameObject.Find("Text").GetComponent<PlayerInput>().isMove = true;
+            GameObject.Find("XR Rig").GetComponent<PlayerInput>().isMove = true;
         }
     }
 }

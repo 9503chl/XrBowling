@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.UI;
 
-[RequireComponent(typeof(Text))]
 public class PlayerInput : MonoBehaviour
 {
-    Text uiText;
+
     public XRController controller = null;
+    private GameObject _camera;
     public bool isLeft = false;
     public bool isRight = false;
     public bool isMove = false;
 
-    private void Start()
+    private void Awake()
     {
-        uiText = GetComponent<Text>();
+        _camera = GetComponent<XRRig>().cameraGameObject;
     }
     void Update()
     {
@@ -26,7 +25,6 @@ public class PlayerInput : MonoBehaviour
             if (!isMove)
             {
                 isLeft = true;
-                uiText.text = string.Format("왼쪽 회전 적용");
             }
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -34,7 +32,6 @@ public class PlayerInput : MonoBehaviour
             if (!isMove)
             {
                 isRight = true;
-                uiText.text = string.Format("오른쪽 회전 적용");
             }
         }
         if (Input.GetKeyDown(KeyCode.DownArrow)) {
@@ -42,7 +39,6 @@ public class PlayerInput : MonoBehaviour
             {
                 isRight = false;
                 isLeft = false;
-                uiText.text = string.Format("무회전");
             }
         }
 #endif
@@ -51,7 +47,6 @@ public class PlayerInput : MonoBehaviour
             if (!isMove)
             {
                 isLeft = true;
-                uiText.text = string.Format("왼쪽 회전 적용");
             }
         }
         if (controller.inputDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool primary)) //A
@@ -59,7 +54,6 @@ public class PlayerInput : MonoBehaviour
             if (!isMove)
                 {
                 isRight = true;
-                uiText.text = string.Format("오른쪽 회전 적용");
             }
         }
         if(controller.inputDevice.TryGetFeatureValue(CommonUsages.gripButton, out bool grip))
@@ -68,7 +62,6 @@ public class PlayerInput : MonoBehaviour
             {
                 isLeft = false;
                 isRight = false;
-                uiText.text = string.Format("무회전");
             }
         }
     }
