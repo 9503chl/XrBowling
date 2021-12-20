@@ -8,16 +8,20 @@ public class PlayerInput : MonoBehaviour
 {
 
     public XRController controller = null;
-    private GameObject _camera;
     public bool isLeft = false;
     public bool isRight = false;
     public bool isMove = false;
+    private GameObject _camera;
 
     private void Awake()
     {
         _camera = GetComponent<XRRig>().cameraGameObject;
     }
-    void Update()
+    private void Update()
+    {
+        CommonInput();
+    }
+    private void CommonInput()
     {
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -34,7 +38,8 @@ public class PlayerInput : MonoBehaviour
                 isRight = true;
             }
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow)) {
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
             if (!isMove)
             {
                 isRight = false;
@@ -42,26 +47,31 @@ public class PlayerInput : MonoBehaviour
             }
         }
 #endif
-        if (controller.inputDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out bool secondry))//B
+        if (controller.inputDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 position))
         {
             if (!isMove)
             {
-                isLeft = true;
-            }
-        }
-        if (controller.inputDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool primary)) //A
-        {
-            if (!isMove)
+                if (position.x < 0)
                 {
-                isRight = true;
+                    isLeft = true;
+                    isRight = false;
+                    position.x = 0;
+                }
+                else if (position.x > 0) { 
+                    isRight = true;
+                    isLeft = false;
+                    position.x = 0;
+                }
             }
         }
-        if(controller.inputDevice.TryGetFeatureValue(CommonUsages.gripButton, out bool grip))
+        if (controller.inputDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out bool press)) //B
         {
-            if (!isMove)
+            if (press)
             {
-                isLeft = false;
+                position.x = 0;
                 isRight = false;
+                isLeft = false;
+                press = false;
             }
         }
     }
