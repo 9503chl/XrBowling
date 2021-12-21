@@ -18,8 +18,7 @@ public class DesPin : MonoBehaviour
             Destroy(other.gameObject, 0.2f);
             GameObject.Find("hall").GetComponent<Dump>().dumpCount = 0;
             GameObject.Find("hall2").GetComponent<Dump>().dumpCount = 0;
-            GameObject.FindWithTag("Ball").GetComponent<Accel>().isMove = false;
-            GameObject.Find("XR Rig").GetComponent<PlayerInput>().isMove = false;
+            Invoke("isMoveOff", 1.5f);
         }
         else Destroy(other.gameObject);
     }
@@ -31,5 +30,10 @@ public class DesPin : MonoBehaviour
     void isCollideM()
     {
         isCollide = true;
+    }
+    void isMoveOff()
+    {
+        GameObject.FindWithTag("Ball").GetComponent<Accel>().isMove = false;
+        GameObject.Find("XR Rig").GetComponent<PlayerInput>().isMove = false;
     }
 }
