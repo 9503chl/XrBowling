@@ -29,12 +29,14 @@ public class PlayerInput : MonoBehaviour
             if (!isMove)
             {
                 isLeft = true;
+                isRight = false;
             }
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             if (!isMove)
             {
+                isLeft = false;
                 isRight = true;
             }
         }
@@ -57,7 +59,8 @@ public class PlayerInput : MonoBehaviour
                     isRight = false;
                     position.x = 0;
                 }
-                else if (position.x > 0) { 
+                else if (position.x > 0)
+                {
                     isRight = true;
                     isLeft = false;
                     position.x = 0;
@@ -66,12 +69,15 @@ public class PlayerInput : MonoBehaviour
         }
         if (controller.inputDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out bool press)) //B
         {
-            if (press)
+            if (!isMove)
             {
-                position.x = 0;
-                isRight = false;
-                isLeft = false;
-                press = false;
+                if (press)
+                {
+                    position.x = 0;
+                    isRight = false;
+                    isLeft = false;
+                    press = false;
+                }
             }
         }
     }
