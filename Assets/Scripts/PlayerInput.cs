@@ -10,13 +10,10 @@ public class PlayerInput : MonoBehaviour
     public XRController controller = null;
     public bool isLeft = false;
     public bool isRight = false;
+    public bool isNormal = false;
     public bool isMove = false;
     private GameObject _camera;
 
-    private void Awake()
-    {
-        _camera = GetComponent<XRRig>().cameraGameObject;
-    }
     private void Update()
     {
         CommonInput();
@@ -30,6 +27,7 @@ public class PlayerInput : MonoBehaviour
             {
                 isLeft = true;
                 isRight = false;
+                isNormal = false;
             }
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -38,14 +36,16 @@ public class PlayerInput : MonoBehaviour
             {
                 isLeft = false;
                 isRight = true;
+                isNormal = false;
             }
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             if (!isMove)
             {
-                isRight = false;
                 isLeft = false;
+                isRight = false;
+                isNormal = true;
             }
         }
 #endif
@@ -57,12 +57,14 @@ public class PlayerInput : MonoBehaviour
                 {
                     isLeft = true;
                     isRight = false;
+                    isNormal = false;
                     position.x = 0;
                 }
                 else if (position.x > 0)
                 {
                     isRight = true;
                     isLeft = false;
+                    isNormal = false;
                     position.x = 0;
                 }
             }
@@ -76,6 +78,7 @@ public class PlayerInput : MonoBehaviour
                     position.x = 0;
                     isRight = false;
                     isLeft = false;
+                    isNormal = true;
                     press = false;
                 }
             }

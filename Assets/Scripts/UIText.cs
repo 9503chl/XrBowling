@@ -7,34 +7,33 @@ using DG.Tweening;
 [RequireComponent(typeof(Text))]
 public class UIText : MonoBehaviour
 {
-    Text uiText1;
-    Text uiText2;
-    Text uiText3;
-    // Update is called once per frame
+    Text uiText;
+    private void Start()
+    {
+        uiText = GetComponent<Text>();
+    }
     void Update()
     {
-        if(GameObject.Find("XR Rig").GetComponent<PlayerInput>().isLeft){
-            uiText1.GetComponent<Text>();
-            uiText1.text = string.Format("왼쪽 회전 적용");
-            uiText1.DOFade(0, 2);
-            uiText2.DOFade(1, 0.1f);
-            uiText3.DOFade(1, 0.1f);
-        }
-        else if(GameObject.Find("XR Rig").GetComponent<PlayerInput>().isRight)
+        if(GameObject.Find("XR Rig").GetComponent<PlayerInput>().isLeft)
         {
-            uiText2.GetComponent<Text>();
-            uiText2.text = string.Format("오른쪽 회전 적용");
-            uiText1.DOFade(1, 0.1f);
-            uiText2.DOFade(0, 2);
-            uiText3.DOFade(1, 0.1f);
+            uiText.DOFade(100, 0.1f);
+            uiText.text = string.Format("왼쪽 회전 적용");
+            uiText.DOFade(0, 2);
+            GameObject.Find("XR Rig").GetComponent<PlayerInput>().isLeft = false;
         }
-        else
+        if(GameObject.Find("XR Rig").GetComponent<PlayerInput>().isRight)
         {
-            uiText3.GetComponent<Text>();
-            uiText3.text = string.Format("무회전");
-            uiText1.DOFade(1, 0.1f);
-            uiText2.DOFade(1, 0.1f);
-            uiText3.DOFade(0, 2);
+            uiText.DOFade(100, 0.1f);
+            uiText.text = string.Format("오른쪽 회전 적용");
+            uiText.DOFade(0, 2f);
+            GameObject.Find("XR Rig").GetComponent<PlayerInput>().isRight = false;
+        }
+        if(GameObject.Find("XR Rig").GetComponent<PlayerInput>().isNormal)
+        {
+            uiText.DOFade(100, 0.1f);
+            uiText.text = string.Format("무회전");
+            uiText.DOFade(0, 2f);
+            GameObject.Find("XR Rig").GetComponent<PlayerInput>().isNormal = false;
         }
     }
 }
