@@ -8,16 +8,16 @@ public class PlayerInput : MonoBehaviour
 {
 
     public XRController controller = null;
-    private GameObject _camera;
     public bool isLeft = false;
     public bool isRight = false;
+    public bool isNormal = false;
     public bool isMove = false;
 
-    private void Awake()
+    private void Update()
     {
-        _camera = GetComponent<XRRig>().cameraGameObject;
+        CommonInput();
     }
-    void Update()
+    private void CommonInput()
     {
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -25,43 +25,61 @@ public class PlayerInput : MonoBehaviour
             if (!isMove)
             {
                 isLeft = true;
+                isRight = false;
+                isNormal = false;
             }
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             if (!isMove)
             {
+                isLeft = false;
                 isRight = true;
+                isNormal = false;
             }
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow)) {
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
             if (!isMove)
             {
-                isRight = false;
                 isLeft = false;
+                isRight = false;
+                isNormal = true;
             }
         }
 #endif
-        if (controller.inputDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out bool secondry))//B
+        if (controller.inputDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 position))
         {
             if (!isMove)
             {
-                isLeft = true;
-            }
-        }
-        if (controller.inputDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool primary)) //A
-        {
-            if (!isMove)
+                if (position.x < 0)
                 {
-                isRight = true;
+                    isLeft = true;
+                    isRight = false;
+                    isNormal = false;
+                    position.x = 0;
+                }
+                else if (position.x > 0)
+                {
+                    isRight = true;
+                    isLeft = false;
+                    isNormal = false;
+                    position.x = 0;
+                }
             }
         }
-        if(controller.inputDevice.TryGetFeatureValue(CommonUsages.gripButton, out bool grip))
+        if (controller.inputDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out bool press)) //B
         {
             if (!isMove)
             {
-                isLeft = false;
-                isRight = false;
+                if (press)
+                {
+                    position.x = 0;
+                    isRight = false;
+                    isLeft = false;
+                    isNormal = true;
+                    press = false;
+                }
             }
         }
     }

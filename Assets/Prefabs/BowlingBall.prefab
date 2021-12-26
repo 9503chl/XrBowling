@@ -119,6 +119,9 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_InteractionLayers:
+    m_Bits: 4294967295
+  m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
@@ -130,6 +133,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FirstSelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_LastSelectExited:
     m_PersistentCalls:
       m_Calls: []
   m_SelectEntered:
@@ -233,6 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c2b97b6b03039b47898484342240946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballSound: {fileID: 3473767332316146416, guid: 44ae618b76f977c4ca34ac3fda583266, type: 3}
 --- !u!114 &8333442581469186100
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,29 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 [RequireComponent(typeof(Text))]
 public class UIText : MonoBehaviour
 {
     Text uiText;
-    void Start()
+    private void Start()
     {
         uiText = GetComponent<Text>();
     }
-
-    // Update is called once per frame
     void Update()
     {
-        if(GameObject.Find("XR Rig").GetComponent<PlayerInput>().isLeft){
+        if(GameObject.Find("XR Rig").GetComponent<PlayerInput>().isLeft)
+        {
+            uiText.DOFade(100, 0.1f);
             uiText.text = string.Format("왼쪽 회전 적용");
+            uiText.DOFade(0, 2);
+            GameObject.Find("XR Rig").GetComponent<PlayerInput>().isLeft = false;
         }
-        else if(GameObject.Find("XR Rig").GetComponent<PlayerInput>().isRight)
+        if(GameObject.Find("XR Rig").GetComponent<PlayerInput>().isRight)
         {
+            uiText.DOFade(100, 0.1f);
             uiText.text = string.Format("오른쪽 회전 적용");
+            uiText.DOFade(0, 2f);
+            GameObject.Find("XR Rig").GetComponent<PlayerInput>().isRight = false;
         }
-        else
+        if(GameObject.Find("XR Rig").GetComponent<PlayerInput>().isNormal)
         {
+            uiText.DOFade(100, 0.1f);
             uiText.text = string.Format("무회전");
+            uiText.DOFade(0, 2f);
+            GameObject.Find("XR Rig").GetComponent<PlayerInput>().isNormal = false;
         }
     }
 }

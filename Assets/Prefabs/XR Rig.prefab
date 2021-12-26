@@ -606,6 +606,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   isLeft: 0
   isRight: 0
+  isNormal: 0
   isMove: 0
 --- !u!1 &4307526488606313713
 GameObject:

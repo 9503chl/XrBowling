@@ -1,10 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
+
+
+[RequireComponent(typeof(Text))]
 
 public class ScoreText : MonoBehaviour
 {
+    [SerializeField] AudioSource textSound;
+    Text uiText;
     int count = 0;
+    void Start()
+    {
+        uiText = GetComponent<Text>();
+    }
     void FixedUpdate()
     {
         if(count == 3)
@@ -14,7 +25,8 @@ public class ScoreText : MonoBehaviour
         }
         if (GameObject.Find("Score").GetComponent<Score>().turnEnd) 
         {
-            if (gameObject.name == "ScoreBoard")
+            textSound.Play();
+            if (gameObject.name == "ScoreBoard1")
             {
                 string str = "|";
                 for(int i =0; i<10; i++)
@@ -22,10 +34,10 @@ public class ScoreText : MonoBehaviour
                     str += GameObject.Find("Score").GetComponent<Score>().PointNow[i,0];
                     str += "|";
                 }
-                gameObject.GetComponent<TextMesh>().text = str;
+                uiText.DOText(str, 1.5f);
                 count++;
             }
-            else if (gameObject.name == "ScoreBoard1")
+            else if (gameObject.name == "ScoreBoard2")
             {
                 string str = "|";
                 for (int i = 0; i < 10; i++)
@@ -33,10 +45,10 @@ public class ScoreText : MonoBehaviour
                     str += GameObject.Find("Score").GetComponent<Score>().PointNow[i, 1];
                     str += "|";
                 }
-                gameObject.GetComponent<TextMesh>().text = str;
+                uiText.DOText(str, 1.5f);
                 count++;
             }
-            else if (gameObject.name == "ScoreBoard2") 
+            else if (gameObject.name == "ScoreBoard3") 
             {
                 string str = "|";
                 for (int i = 0; i < 10; i++)
@@ -44,7 +56,7 @@ public class ScoreText : MonoBehaviour
                     str += GameObject.Find("Score").GetComponent<Score>().PointNow[i, 2];
                     str += "|";
                 }
-                gameObject.GetComponent<TextMesh>().text = str;
+                uiText.DOText(str, 1.5f);
                 count++;
             }
         }
