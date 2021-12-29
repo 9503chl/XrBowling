@@ -51,15 +51,15 @@ public class TitleDoTween : MonoBehaviour
 
     void doTween()
     {
-        transform.DOMoveZ(200f, 0.2f);
+        transform.DOMoveZ((transform.position.x + 200), 0.2f);
         Invoke("Disabler", 0.2f);
         shotGunSound.Play();
         Camera.VibrateForTime(0.4f);
     }
     void doTweenForward()
     {
-        transform.DOMoveX(-500f, 0.2f);
-        transform.DOMoveY(-500f, 0.2f);
+        transform.DOMoveX((transform.position.x - 500), 0.2f);
+        transform.DOMoveY((transform.position.y - 500), 0.2f);
         Camera.VibrateForTime(0.6f);
         BarrelblowSound.Play();
     }
