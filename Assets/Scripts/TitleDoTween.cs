@@ -46,7 +46,11 @@ public class TitleDoTween : MonoBehaviour
         {
             Invoke("doTween", 3.7f);
         }
-        if (gameObject.tag == "XRBOWLING") Invoke("doTweenForward", 4.2f);
+        if (gameObject.tag == "XRBOWLING")
+        {
+            Invoke("doTweenForward", 4.2f);
+            Invoke("Counter", 4.8f);
+        }
     }
 
     void doTween()
@@ -66,5 +70,9 @@ public class TitleDoTween : MonoBehaviour
     void Disabler()
     {
         gameObject.SetActive(false);
+    }
+    void Counter()
+    {
+        GameObject.Find("Magnet").GetComponent<MagnetMove>().count = 3;
     }
 }
