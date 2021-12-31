@@ -6,7 +6,9 @@ public class TitleDoTween : MonoBehaviour
 {
     [SerializeField]AudioSource shotGunSound;
     [SerializeField] AudioSource BarrelblowSound;
+    [SerializeField] GameObject Pointer;
     CameraShake Camera;
+    public bool DoTweenDone = false;
     void Start()
     {
         Camera = GameObject.FindWithTag("MainCamera").GetComponent<CameraShake>();
@@ -74,5 +76,7 @@ public class TitleDoTween : MonoBehaviour
     void Counter()
     {
         GameObject.Find("Magnet").GetComponent<MagnetMove>().count = 3;
+        DoTweenDone = true;
+        Pointer.SetActive(true);
     }
 }

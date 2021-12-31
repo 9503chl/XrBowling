@@ -11,19 +11,21 @@ public class CameraShake : MonoBehaviour
 
     private void Start()
     {
-        Position1 = new Vector3(0, 0, -5);
+        Position1 = new Vector3(0, 0, 0);
     }
     private void Update()
     {
         if (ShakeTime > 0)
         {
             transform.position = Random.insideUnitSphere * ShakeAmount + Position1;
+            transform.position += new Vector3(0, 0.6f, 0);
             ShakeTime -= Time.deltaTime;
         }
         else
         {
             ShakeTime = 0.0f;
             transform.position = Position1;
+            transform.position += new Vector3(0, 0.6f, 0);
         }
 
     }

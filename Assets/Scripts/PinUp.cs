@@ -17,7 +17,7 @@ public class PinUp : MonoBehaviour
     void Start()
     {
         pos1 = transform.position;
-        pos2 = transform.position - new Vector3(0, 0.65f, 0);
+        pos2 = transform.position - new Vector3(0, 0.55f, 0);
         rg = GetComponent<Rigidbody>();
     }
     void FixedUpdate()
