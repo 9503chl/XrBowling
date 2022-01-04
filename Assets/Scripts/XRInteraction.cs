@@ -11,17 +11,22 @@ public class XRInteraction : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if(other.transform.name == "BowlingBall")
+        if(other.transform.tag == "Ball")
         {
-            light1.DOIntensity(1000, 0.8f);
-            Invoke("Loading", 1.0f);
+            Destroy(other.gameObject);
+            light1.DOIntensity(1000, 1.5f);
+            Invoke("Loading", 2.0f);
         }
         if (other.transform.name == "Shoes")
         {
-            Application.Quit();
+            Destroy(other.gameObject);
+            light1.DOColor(Color.black, 0.1f);
+            light1.DOIntensity(1000, 1.5f);
+            Invoke("Quiting", 2.0f);
         }
         if (other.transform.name == "Pinp")
         {
+            Destroy(other.gameObject);
             if (!Active1)
             {
                 Panel1.SetActive(true);
@@ -37,5 +42,9 @@ public class XRInteraction : MonoBehaviour
     void Loading()
     {
         SceneManager.LoadScene("SampleScene");
+    }
+    void Quiting()
+    {
+        Application.Quit();
     }
 }
