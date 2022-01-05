@@ -14,14 +14,14 @@ public class XRInteraction : MonoBehaviour
         if(other.transform.tag == "Ball")
         {
             Destroy(other.gameObject);
-            light1.DOIntensity(1000, 1.5f);
+            light1.DOIntensity(10, 1.8f);
             Invoke("Loading", 2.0f);
         }
         if (other.transform.name == "Shoes")
         {
             Destroy(other.gameObject);
             light1.DOColor(Color.black, 0.1f);
-            light1.DOIntensity(1000, 1.5f);
+            light1.DOIntensity(10, 1.8f);
             Invoke("Quiting", 2.0f);
         }
         if (other.transform.name == "Pinp")
