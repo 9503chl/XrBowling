@@ -2,26 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using DG.Tweening;
+using UnityEngine.UI;
+
 public class XRInteraction : MonoBehaviour
 {
     [SerializeField] GameObject Panel1;
-    [SerializeField] Light light1;
+    [SerializeField] Image image;
     bool Active1 = false;
-
+    bool isNext = false;
+    Color color;
     private void OnCollisionEnter(Collision other)
     {
         if(other.transform.tag == "Ball")
         {
+            isNext = true;
+            color = image.color;
             Destroy(other.gameObject);
-            light1.DOIntensity(10, 1.8f);
             Invoke("Loading", 2.0f);
         }
         if (other.transform.name == "Shoes")
         {
+            isNext = true;
+            image.color = Color.black;
+            color = image.color;
             Destroy(other.gameObject);
-            light1.DOColor(Color.black, 0.1f);
-            light1.DOIntensity(10, 1.8f);
             Invoke("Quiting", 2.0f);
         }
         if (other.transform.name == "Pinp")
@@ -38,6 +42,10 @@ public class XRInteraction : MonoBehaviour
                 Active1 = false;
             }
         }
+    }
+    private void Update()
+    {
+        if (isNext) color.a += Time.deltaTime;
     }
     void Loading()
     {
