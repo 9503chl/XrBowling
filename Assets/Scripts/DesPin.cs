@@ -34,6 +34,6 @@ public class DesPin : MonoBehaviour
     void isMoveOff()
     {
         GameObject.FindWithTag("Ball").GetComponent<Accel>().isMove = false;
-        GameObject.Find("XR Rig").GetComponent<PlayerInput>().isMove = false;
+        GameObject.Find("RightHand Controller").GetComponent<PlayerInput>().isMove = false;
     }
 }

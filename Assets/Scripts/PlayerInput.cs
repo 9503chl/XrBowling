@@ -34,6 +34,7 @@ public class PlayerInput : MonoBehaviour
     {
         if (collision.transform.tag == "Ball")
         {
+            gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
             power = collision.transform.rotation.z - 180;
         }
     }

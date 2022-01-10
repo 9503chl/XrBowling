@@ -25,7 +25,7 @@ public class Accel : MonoBehaviour
             Angle += 30;
             speed = Mathf.Clamp(speed, 0, power * 0.005f);
             if (Angle >= 360) Angle = 0;
-            if (GameObject.Find("XR Rig").GetComponent<PlayerInput>().power < 0)
+            if (GameObject.Find("RightHand Controller").GetComponent<PlayerInput>().power < 0)
             {
                 if (GameObject.Find("hall").GetComponent<Dump>().dumpCount == 0 && GameObject.Find("hall2").GetComponent<Dump>().dumpCount == 0) //µµÂø±îÁö 2.5ÃÊ
                 {
@@ -42,7 +42,7 @@ public class Accel : MonoBehaviour
                     }
                 }
             }
-            else if (GameObject.Find("XR Rig").GetComponent<PlayerInput>().power > 0)
+            else if (GameObject.Find("RightHand Controller").GetComponent<PlayerInput>().power > 0)
             {
                 if (GameObject.Find("hall").GetComponent<Dump>().dumpCount == 0 && GameObject.Find("hall2").GetComponent<Dump>().dumpCount == 0)
                 {
@@ -65,14 +65,14 @@ public class Accel : MonoBehaviour
                 tr.transform.rotation = Quaternion.Euler(Angle, 0, 0);
             }
         }
-        else power = GameObject.Find("XR Rig").GetComponent<PlayerInput>().power;
+        else power = GameObject.Find("RightHand Controller").GetComponent<PlayerInput>().power;
     }
     void OnCollisionEnter(Collision other)
     {
         if (other.transform.tag == "Floor")
         {
             isMove = true;
-            GameObject.Find("XR Rig").GetComponent<PlayerInput>().isMove = true;
+            GameObject.Find("RightHand Controller").GetComponent<PlayerInput>().isMove = true;
         }
     }
 }

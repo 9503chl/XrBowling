@@ -10,13 +10,13 @@ public class XRInteraction : MonoBehaviour
     [SerializeField] Image image;
     bool Active1 = false;
     bool isNext = false;
-    Color color;
+    float color = 0;
     private void OnCollisionEnter(Collision other)
     {
         if(other.transform.tag == "Ball")
         {
             isNext = true;
-            color = image.color;
+            image.color = new Color(image.color.r, image.color.g, image.color.b, color);
             Destroy(other.gameObject);
             Invoke("Loading", 2.0f);
         }
@@ -24,7 +24,7 @@ public class XRInteraction : MonoBehaviour
         {
             isNext = true;
             image.color = Color.black;
-            color = image.color;
+            image.color = new Color(image.color.r, image.color.g, image.color.b, color);
             Destroy(other.gameObject);
             Invoke("Quiting", 2.0f);
         }
@@ -45,7 +45,8 @@ public class XRInteraction : MonoBehaviour
     }
     private void Update()
     {
-        if (isNext) color.a += Time.deltaTime;
+        color = Mathf.Clamp(color, 0, 255);
+        if (isNext) color += Time.deltaTime;
     }
     void Loading()
     {
