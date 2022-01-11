@@ -7,31 +7,33 @@ using UnityEngine.UI;
 public class XRInteraction : MonoBehaviour
 {
     [SerializeField] GameObject Panel1;
-    [SerializeField] Image Image1;
+    [SerializeField] Image image;
     bool Active1 = false;
     bool isNext = false;
-    float alpha = 0;
     bool isblack = false;
+    float color = 0;
     private void OnCollisionEnter(Collision other)
     {
         if(other.transform.tag == "Ball")
         {
+            GameObject.Find("Images").SetActive(true);
             isNext = true;
+            image.color = new Color(image.color.r, image.color.g, image.color.b, color);
             Destroy(other.gameObject);
             Invoke("Loading", 2.0f);
-            Image1.color = new Color(Image1.color.r, Image1.color.g, Image1.color.b, alpha);
         }
         if (other.transform.name == "Shoes")
         {
+            GameObject.Find("Images").SetActive(true);
             isNext = true;
-            Destroy(other.gameObject);
-            Invoke("Quiting", 2.0f);
-            if (!isblack)
+            if(!isblack)
             {
-                Image1.color = new Color(0, 0, 0, 0);
+                image.color = new Color(0, 0, 0, 0);
                 isblack = true;
             }
-            Image1.color = new Color(Image1.color.r, Image1.color.g, Image1.color.b, alpha);
+            image.color = new Color(image.color.r, image.color.g, image.color.b, color);
+            Destroy(other.gameObject);
+            Invoke("Quiting", 2.0f);
         }
         if (other.transform.name == "Pinp")
         {
@@ -50,9 +52,9 @@ public class XRInteraction : MonoBehaviour
     }
     private void Update()
     {
-        Image1.transform.position = gameObject.transform.position + new Vector3(0, 0, 0.5f);
-        alpha = Mathf.Clamp(alpha, 0, 1);
-        if(isNext) alpha += Time.deltaTime;
+        color = Mathf.Clamp(color, 0, 1);
+        image.transform.position = gameObject.transform.position + new Vector3(0, 0, 0.5f);
+        if (isNext) color += Time.deltaTime;
     }
     void Loading()
     {
