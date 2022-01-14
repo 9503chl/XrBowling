@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using DG.Tweening;
+
 public class XRInteraction : MonoBehaviour
 {
     [SerializeField] GameObject Panel1;
     [SerializeField] GameObject UI;
-    [SerializeField] Image field1;
-    [SerializeField] Image field2;
-    [SerializeField] Image field3;
-    [SerializeField] Image field4;
-    [SerializeField] Image field5;
-    [SerializeField] Image field6;
+    [SerializeField] Camera mainCamera;
+    [SerializeField] GameObject Cube;
+    [SerializeField] GameObject CubeBack;
+    [SerializeField] Material mat;
 
     bool Active1 = false;
     bool isNext = false;
@@ -60,14 +58,9 @@ public class XRInteraction : MonoBehaviour
         else InputColor = new Color(255, 255, 255, alpha1);
         if (isNext) //위치 고정
         {
-            field1.transform.position = gameObject.transform.position + new Vector3(0, -0.6f, 2f);
-            field2.transform.position = gameObject.transform.position + new Vector3(0, -0.6f, -2f);
-            field3.transform.position = gameObject.transform.position + new Vector3(0, 1.4f, 0);
-            field4.transform.position = gameObject.transform.position + new Vector3(0, -0.6f, 0);
-            field5.transform.position = gameObject.transform.position + new Vector3(2f, -0.6f, 0);
-            field6.transform.position = gameObject.transform.position + new Vector3(-2f, -0.6f, 0);
-            field1.color = InputColor; field2.color = InputColor; field3.color = InputColor;
-            field4.color = InputColor; field5.color = InputColor; field6.color = InputColor;
+            Cube.transform.position = mainCamera.transform.position + new Vector3(0, 0, 0.5f);
+            Cube.transform.position = mainCamera.transform.position + new Vector3(0, 0, -0.5f);
+            mat.color = InputColor;
             alpha1 += Time.deltaTime * 0.3f; //알파값 시간에 따라 증가
         }
         if (count == 10) //핀다쓸시 다시 생성
