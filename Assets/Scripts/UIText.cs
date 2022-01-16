@@ -17,13 +17,13 @@ public class UIText : MonoBehaviour
         if(GameObject.Find("RightHand Controller").GetComponent<PlayerInput>().isLeft)
         {
             uiText.DOFade(100, 0.1f); 
-            uiText.text = string.Format("왼쪽 회전 {0:f2}",Mathf.Abs(GameObject.Find("XR Rig").GetComponent<PlayerInput>().power));
+            uiText.text = string.Format("왼쪽 회전 {0:f2}",Mathf.Abs(GameObject.Find("RightHand Controller").GetComponent<PlayerInput>().power));
             uiText.DOFade(0, 2);
         }
         if(GameObject.Find("RightHand Controller").GetComponent<PlayerInput>().isRight)
         {
             uiText.DOFade(100, 0.1f);
-            uiText.text = string.Format("오른쪽 회전 {0:f2}", GameObject.Find("XR Rig").GetComponent<PlayerInput>().power);
+            uiText.text = string.Format("오른쪽 회전 {0:f2}", GameObject.Find("RightHand Controller").GetComponent<PlayerInput>().power);
             uiText.DOFade(0, 2f);
         }
         if(GameObject.Find("RightHand Controller").GetComponent<PlayerInput>().isNormal)

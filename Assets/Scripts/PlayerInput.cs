@@ -6,8 +6,10 @@ using UnityEngine.UI;
 public class PlayerInput : MonoBehaviour
 {
     [SerializeField] GameObject UI;
-    [SerializeField] Image field;
+    [SerializeField] GameObject sphere;
     [SerializeField] Camera mainCamera;
+    [SerializeField] Material mat;
+    [SerializeField] GameObject Hands;
 
     float alpha1 = 0;
     bool isNext = false;
@@ -20,20 +22,21 @@ public class PlayerInput : MonoBehaviour
 
     private void FixedUpdate()
     {
+        power = gameObject.transform.rotation.z;
         InputColor = new Color(0, 0, 0, alpha1);
-        if (power > 0)
-        {
-            isRight = true;
-            isLeft = false;
-            isNormal = false;
-        }
-        else if (power < 0)
+        if (power > 0.15)
         {
             isRight = false;
             isLeft = true;
             isNormal = false;
         }
-        else if (power == 0)
+        else if (power < -0.15)
+        {
+            isRight = true;
+            isLeft = false;
+            isNormal = false;
+        }
+        else
         {
             isRight = false;
             isLeft = false;
@@ -41,9 +44,8 @@ public class PlayerInput : MonoBehaviour
         }
         if (isNext)
         {
-            field.transform.position = mainCamera.transform.position + new Vector3(0, -0.6f, 0.5f);
-            field.transform.rotation = mainCamera.transform.rotation;
-            field.color = InputColor;
+            sphere.transform.position = mainCamera.transform.position + new Vector3(0, -0.4f, 0);
+            mat.color = InputColor;
             alpha1 += Time.deltaTime * 0.3f; //알파값 시간에 따라 증가
         }
         if (alpha1 >=1.0f) SceneManager.LoadScene("TitleScene");
@@ -52,7 +54,7 @@ public class PlayerInput : MonoBehaviour
     {
         if (collision.transform.tag == "Ball")
         {
-            gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
+            Hands.transform.rotation = Quaternion.Euler(180, 0, 0); //손뒤집기
             power = collision.transform.rotation.z - 180;
         }
         if(collision.transform.name == "Shoes")
@@ -60,5 +62,9 @@ public class PlayerInput : MonoBehaviour
             UI.SetActive(false);
             isNext = true;
         }
+    }
+    private void OnCollisionExit(Collision collision) //원상복구
+    {
+        if(collision.transform.tag == "Ball") Hands.transform.rotation = Quaternion.Euler(180, 0, 0);
     }
 }

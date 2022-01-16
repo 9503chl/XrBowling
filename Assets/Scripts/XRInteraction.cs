@@ -9,8 +9,7 @@ public class XRInteraction : MonoBehaviour
     [SerializeField] GameObject Panel1;
     [SerializeField] GameObject UI;
     [SerializeField] Camera mainCamera;
-    [SerializeField] GameObject Cube;
-    [SerializeField] GameObject CubeBack;
+    [SerializeField] GameObject sphere;
     [SerializeField] Material mat;
 
     bool Active1 = false;
@@ -58,8 +57,7 @@ public class XRInteraction : MonoBehaviour
         else InputColor = new Color(255, 255, 255, alpha1);
         if (isNext) //위치 고정
         {
-            Cube.transform.position = mainCamera.transform.position + new Vector3(0, 0, 0.5f);
-            Cube.transform.position = mainCamera.transform.position + new Vector3(0, 0, -0.5f);
+            sphere.transform.position = mainCamera.transform.position + new Vector3(0,-0.4f,0);
             mat.color = InputColor;
             alpha1 += Time.deltaTime * 0.3f; //알파값 시간에 따라 증가
         }
