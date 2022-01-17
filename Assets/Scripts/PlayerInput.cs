@@ -44,27 +44,19 @@ public class PlayerInput : MonoBehaviour
         }
         if (isNext)
         {
-            sphere.transform.position = mainCamera.transform.position + new Vector3(0, -0.4f, 0);
+            sphere.transform.position = mainCamera.transform.position;
             mat.color = InputColor;
             alpha1 += Time.deltaTime * 0.3f; //알파값 시간에 따라 증가
         }
         if (alpha1 >=1.0f) SceneManager.LoadScene("TitleScene");
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollsionrEnter(Collision other)
     {
-        if (collision.transform.tag == "Ball")
+        if(other.transform.name == "Shoes")
         {
-            Hands.transform.rotation = Quaternion.Euler(180, 0, 0); //손뒤집기
-            power = collision.transform.rotation.z - 180;
-        }
-        if(collision.transform.name == "Shoes")
-        {
+            Destroy(other.gameObject);
             UI.SetActive(false);
             isNext = true;
         }
-    }
-    private void OnCollisionExit(Collision collision) //원상복구
-    {
-        if(collision.transform.tag == "Ball") Hands.transform.rotation = Quaternion.Euler(180, 0, 0);
     }
 }

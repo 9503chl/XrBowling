@@ -24,47 +24,24 @@ public class Accel : MonoBehaviour
             Angle += 30;
             speed = power;
             if (Angle >= 360) Angle = 0;
-            if (GameObject.Find("RightHand Controller").GetComponent<PlayerInput>().power <  -0.15f)
+            if (GameObject.Find("hall").GetComponent<Dump>().dumpCount == 0 && GameObject.Find("hall2").GetComponent<Dump>().dumpCount == 0) //µµÂø±îÁö 2.5ÃÊ
             {
-                if (GameObject.Find("hall").GetComponent<Dump>().dumpCount == 0 && GameObject.Find("hall2").GetComponent<Dump>().dumpCount == 0) //µµÂø±îÁö 2.5ÃÊ
+                if (speed < -0.15f) //¿À
                 {
-                    if (time <= 2.4f)
-                    {
-                        tr.transform.Translate(new Vector3(speed * 0.4f, 0, 0.6f) * Time.deltaTime * 5.0f, Space.World);
-                        tr.transform.rotation = Quaternion.Euler(Angle, 0, Angle);
-                    }
-                    else if (time <= 4.2f)
-                    {
-                        spin += Time.deltaTime;
-                        tr.transform.Translate(new Vector3(-speed * spin * 0.7f, 0, 0.6f) * Time.deltaTime * 5.0f, Space.World);
-                        tr.transform.rotation = Quaternion.Euler(Angle, 0, Angle);
-                    }
+                    tr.transform.rotation = Quaternion.Euler(Angle, 0, -Angle);
                 }
-                else
+                else if (speed > 0.15f) //¿Þ
                 {
-                    tr.transform.Translate(Vector3.forward * 0.6f * Time.deltaTime * 5.0f, Space.World);
-                    tr.transform.rotation = Quaternion.Euler(Angle, 0, 0);
+                    tr.transform.rotation = Quaternion.Euler(Angle, 0, Angle);
                 }
-            }
-            else if (GameObject.Find("RightHand Controller").GetComponent<PlayerInput>().power > 0.15f)
-            {
-                if (GameObject.Find("hall").GetComponent<Dump>().dumpCount == 0 && GameObject.Find("hall2").GetComponent<Dump>().dumpCount == 0)
+                if (time <= 1.2f)
                 {
-                    if (time <= 2.4f)
-                    {
-                        tr.transform.Translate(new Vector3(-speed * 0.4f, 0, 0.6f) * Time.deltaTime * 5.0f, Space.World);
-                        tr.transform.rotation = Quaternion.Euler(Angle, 0, Angle);
-                    }
-                    else if (time <= 4.2f)
-                    {
-                        spin += Time.deltaTime;
-                        tr.transform.Translate(new Vector3(speed * spin * 0.7f, 0, 0.6f) * Time.deltaTime * 5.0f, Space.World);
-                        tr.transform.rotation = Quaternion.Euler(Angle, 0, Angle);
-                    }
-                } else
+                    tr.transform.Translate(new Vector3(speed * 0.4f, 0, 0.6f) * Time.deltaTime * 5.0f, Space.World);
+                }
+                else if (time <= 3.5f)
                 {
-                    tr.transform.Translate(Vector3.forward * 0.6f * Time.deltaTime * 5.0f, Space.World);
-                    tr.transform.rotation = Quaternion.Euler(Angle, 0, 0);
+                    spin += Time.deltaTime * 1.1f;
+                    tr.transform.Translate(new Vector3(-speed * spin * 0.5f, 0, 0.6f) * Time.deltaTime * 5.0f, Space.World);
                 }
             }
             else

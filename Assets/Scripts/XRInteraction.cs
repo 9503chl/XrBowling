@@ -57,7 +57,7 @@ public class XRInteraction : MonoBehaviour
         else InputColor = new Color(255, 255, 255, alpha1);
         if (isNext) //위치 고정
         {
-            sphere.transform.position = mainCamera.transform.position + new Vector3(0,-0.4f,0);
+            sphere.transform.position = mainCamera.transform.position;
             mat.color = InputColor;
             alpha1 += Time.deltaTime * 0.3f; //알파값 시간에 따라 증가
         }
@@ -67,6 +67,6 @@ public class XRInteraction : MonoBehaviour
             count = 0;
         }
         if (isblack && alpha1 >= 1.0f) Application.Quit();
-        else if (alpha1 >= 1.0f) SceneManager.LoadScene("SampleScene");
+        else if (alpha1 >= 1.0f) SceneManager.LoadScene("GameScene");
     }
 }

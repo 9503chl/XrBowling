@@ -11,7 +11,7 @@ public class TitleDoTween : MonoBehaviour
     public bool DoTweenDone = false;
     void Start()
     {
-        Camera = GameObject.FindWithTag("MainCamera").GetComponent<CameraShake>();
+        Camera = GameObject.Find("XR Rig").GetComponent<CameraShake>();
         if (gameObject.name == "X")
         {
             Invoke("doTween", 0.5f);
