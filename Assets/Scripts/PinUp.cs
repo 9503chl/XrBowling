@@ -22,7 +22,7 @@ public class PinUp : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (gameObject.transform.rotation.eulerAngles.x > 310 || gameObject.transform.rotation.eulerAngles.x < 7.5)
+        if (gameObject.transform.rotation.eulerAngles.x > 330 || gameObject.transform.rotation.eulerAngles.x < 7.5)
         { 
             rg.useGravity = true; gameObject.GetComponent<Rigidbody>().isKinematic = false; 
             GameObject.Find("Score").GetComponent<Score>().sCount++;

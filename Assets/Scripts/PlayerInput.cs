@@ -9,7 +9,6 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] GameObject sphere;
     [SerializeField] Camera mainCamera;
     [SerializeField] Material mat;
-    [SerializeField] GameObject Hands;
 
     float alpha1 = 0;
     bool isNext = false;
@@ -50,12 +49,12 @@ public class PlayerInput : MonoBehaviour
         }
         if (alpha1 >=1.0f) SceneManager.LoadScene("TitleScene");
     }
-    private void OnCollsionrEnter(Collision other)
+   
+    private void OnCollisionEnter(Collision other)
     {
         if(other.transform.name == "Shoes")
         {
             Destroy(other.gameObject);
-            UI.SetActive(false);
             isNext = true;
         }
     }
