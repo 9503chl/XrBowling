@@ -50,7 +50,7 @@ public class PlayerInput : MonoBehaviour
         if (alpha1 >=1.0f) SceneManager.LoadScene("TitleScene");
     }
    
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if(other.transform.name == "Shoes")
         {
