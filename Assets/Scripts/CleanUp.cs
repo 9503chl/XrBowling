@@ -19,7 +19,7 @@ public class CleanUp : MonoBehaviour
 #endif
     void FixedUpdate()
     { 
-        if (GameObject.Find("Magnet").GetComponent<MagnetMove>().isMagnetMove) //첫번째 시퀀스 고장남
+        if (GameObject.Find("Magnet").GetComponent<MagnetMove>().isMagnetMove) 
         {
             if (Once1) Invoke("FirstM", 0.5f);
             if (Vector3.Distance(gameObject.transform.position, Target1.transform.position) <= 0.05f)
@@ -60,14 +60,18 @@ public class CleanUp : MonoBehaviour
     }
     void FirstM()
     {
-        transform.position = Vector3.Lerp(transform.position, Target1.position, speed1 * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, Target1.position, speed1 * Time.deltaTime * 0.7f);
     }
     void SecondM()
     {
-        transform.position = Vector3.Lerp(transform.position, Target2.position, speed2 * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, Target2.position, speed2 * Time.deltaTime * 0.7f);
     }
     void ThirdM()
     {
         transform.position = Vector3.Lerp(transform.position, Target3.position, speed1 * Time.deltaTime);
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Pin") Destroy(collision.gameObject);
     }
 }

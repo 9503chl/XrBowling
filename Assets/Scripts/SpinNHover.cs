@@ -32,9 +32,9 @@ public class SpinNHover : MonoBehaviour
     {
         if (Angle >= 360) Angle = 0;
         Angle += 4;
-        gameObject.transform.rotation = Quaternion.Euler(0, Angle, 0);
         if (gameObject.name == "Shoes")
         {
+            gameObject.transform.rotation = Quaternion.Euler(0, Angle, 0);
             if (!isdown)
             {
                 if (Vector3.Distance(transform.position, MovePos) <= 0.1f) isdown = true;
@@ -48,6 +48,7 @@ public class SpinNHover : MonoBehaviour
             }
         }
         if (!isGrab) {
+            gameObject.transform.rotation = Quaternion.Euler(0, Angle, 0);
             if (gameObject.tag == "Ball")
             {
                 if (!isdown1)
@@ -68,7 +69,7 @@ public class SpinNHover : MonoBehaviour
     {
         {
             if (other.transform.name == "BreakWall") GameObject.Find("Spawner").GetComponent<Ball>().isGone = true;
-            if (other.transform.name == "Floor") GameObject.Find("Spawner").GetComponent<Ball>().isRoll = true;
+            if (other.transform.tag == "Floor") GameObject.Find("Spawner").GetComponent<Ball>().isRoll = true;
         }
     }
     private void OnTriggerExit(Collider other)

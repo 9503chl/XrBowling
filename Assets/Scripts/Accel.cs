@@ -10,7 +10,7 @@ public class Accel : MonoBehaviour
     public bool isMove = false;
     public float speed = 0.0f;
     float spin = 0;
-    int Angle = 0;
+    public int Angle = 0;
     public float time = 0.0f;
     void Awake()
     {
@@ -26,25 +26,23 @@ public class Accel : MonoBehaviour
             if (Angle >= 360) Angle = 0;
             if (GameObject.Find("hall").GetComponent<Dump>().dumpCount == 0 && GameObject.Find("hall2").GetComponent<Dump>().dumpCount == 0) //도착까지 2.5초
             {
-                if (speed < -0.15f) //오
-                {
+                if (speed <= -0.15f) //오 회전
                     tr.transform.rotation = Quaternion.Euler(Angle, 0, -Angle);
-                }
-                else if (speed > 0.15f) //왼
-                {
+                else if (speed >= 0.15f) //왼 회전
                     tr.transform.rotation = Quaternion.Euler(Angle, 0, Angle);
-                }
-                if (time <= 1.2f)
+                else // 무회전
+                    tr.transform.rotation = Quaternion.Euler(Angle, 0, 0);
+                if (time <= 1.2f) //대각선 이동
                 {
-                    tr.transform.Translate(new Vector3(speed * 0.4f, 0, 0.6f) * Time.deltaTime * 5.0f, Space.World);
+                    tr.transform.Translate(new Vector3(speed * 0.3f, 0, 0.6f) * Time.deltaTime * 5.0f, Space.World);
                 }
-                else if (time <= 3.5f)
+                else if (time <= 3.5f) //회전이 천천히 걸림
                 {
-                    spin += Time.deltaTime * 1.1f;
+                    spin += Time.deltaTime ;
                     tr.transform.Translate(new Vector3(-speed * spin * 0.5f, 0, 0.6f) * Time.deltaTime * 5.0f, Space.World);
                 }
             }
-            else
+            else //덤에 빠졌을때 직선운동
             {
                 tr.transform.Translate(Vector3.forward * 0.6f * Time.deltaTime * 5.0f, Space.World);
                 tr.transform.rotation = Quaternion.Euler(Angle, 0, 0);

@@ -23,13 +23,13 @@ public class PlayerInput : MonoBehaviour
     {
         power = gameObject.transform.rotation.z;
         InputColor = new Color(0, 0, 0, alpha1);
-        if (power > 0.15)
+        if (power >= 0.15)
         {
             isRight = false;
             isLeft = true;
             isNormal = false;
         }
-        else if (power < -0.15)
+        else if (power <= -0.15)
         {
             isRight = true;
             isLeft = false;

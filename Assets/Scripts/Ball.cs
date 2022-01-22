@@ -13,7 +13,7 @@ public class Ball : MonoBehaviour
         if (isGone) //공이랑 breakwall이 충돌시
         {
             ballSound.Stop();
-            Spawner1();
+            Invoke("Spawner1",4.5f);
             isGone = false; isRoll = false;
         }
         if (isRoll) Invoke("SoundPlay", 0.05f);
