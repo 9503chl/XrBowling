@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Accel : MonoBehaviour
 {
+    GameObject maincam;
+    [SerializeField]GameObject viewcam;
     float power;
     private Transform tr;
     public bool isMove = false;
@@ -15,11 +17,15 @@ public class Accel : MonoBehaviour
     void Awake()
     {
         tr = GetComponent<Transform>();
+        maincam = GameObject.Find("Main Camera");
     }
     void FixedUpdate()
     {
         if (isMove)
         {
+            maincam.SetActive(false);
+            viewcam.SetActive(true);
+            viewcam.transform.position = gameObject.transform.position + new Vector3(0, 0.15f, 0);
             time += Time.deltaTime; //움직인 시간
             Angle += 30;
             speed = power;
@@ -46,6 +52,8 @@ public class Accel : MonoBehaviour
             {
                 tr.transform.Translate(Vector3.forward * 0.6f * Time.deltaTime * 5.0f, Space.World);
                 tr.transform.rotation = Quaternion.Euler(Angle, 0, 0);
+                maincam.SetActive(true);
+                viewcam.SetActive(false);
             }
         }
         else power = GameObject.Find("RightHand Controller").GetComponent<PlayerInput>().power;

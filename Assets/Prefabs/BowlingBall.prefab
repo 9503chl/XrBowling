@@ -242,8 +242,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43f9ea1e3d553b94386a5c75fc5ea019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  viewcam: {fileID: 7057740178787937639, guid: b20556bb16f8628458b67ce1b652ccca, type: 3}
   isMove: 0
   speed: 0
+  Angle: 0
   time: 0
 --- !u!114 &-2888660692624244578
 MonoBehaviour:
