@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Score : MonoBehaviour
 {
+    [SerializeField] GameObject panelUI;
+    [SerializeField] GameObject shoes;
+    [SerializeField] GameObject ball;
     public string[,] PointNow = new string[10, 3];
     public int round = 0; //10라운드
     public int tCount = 0; //1,2턴
@@ -13,6 +16,12 @@ public class Score : MonoBehaviour
     public bool turnEnd = false;
     void FixedUpdate()
     {
+        if (round == 10)
+        {
+            panelUI.SetActive(true);
+            ball.SetActive(false);
+            shoes.SetActive(false);
+        }
         if(GameObject.Find("BreakWall").GetComponent<DesPin>().isStart)
         {
             if (tCount == 1 && sCount == 10) // 스트라이크

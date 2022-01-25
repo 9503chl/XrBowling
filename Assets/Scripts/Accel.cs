@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Accel : MonoBehaviour
 {
-    GameObject maincam;
-    [SerializeField]GameObject viewcam;
+    [SerializeField]GameObject mainCam;
+    public GameObject viewCamera;
     float power;
     private Transform tr;
     public bool isMove = false;
@@ -14,18 +14,24 @@ public class Accel : MonoBehaviour
     float spin = 0;
     public int Angle = 0;
     public float time = 0.0f;
+    bool once = false;
     void Awake()
     {
         tr = GetComponent<Transform>();
-        maincam = GameObject.Find("Main Camera");
+        viewCamera = GameObject.Find("View Camera");
+        viewCamera.SetActive(false);
     }
     void FixedUpdate()
     {
         if (isMove)
         {
-            maincam.SetActive(false);
-            viewcam.SetActive(true);
-            viewcam.transform.position = gameObject.transform.position + new Vector3(0, 0.15f, 0);
+            if (!once) 
+            {
+                mainCam.SetActive(false);
+                viewCamera.SetActive(true);
+                once = true;
+            }
+            viewCamera.transform.position = gameObject.transform.position + new Vector3(0, 0.2f, -0.1f);
             time += Time.deltaTime; //움직인 시간
             Angle += 30;
             speed = power;
@@ -44,7 +50,7 @@ public class Accel : MonoBehaviour
                 }
                 else if (time <= 3.5f) //회전이 천천히 걸림
                 {
-                    spin += Time.deltaTime ;
+                    spin += Time.deltaTime;
                     tr.transform.Translate(new Vector3(-speed * spin * 0.5f, 0, 0.6f) * Time.deltaTime * 5.0f, Space.World);
                 }
             }
@@ -52,11 +58,12 @@ public class Accel : MonoBehaviour
             {
                 tr.transform.Translate(Vector3.forward * 0.6f * Time.deltaTime * 5.0f, Space.World);
                 tr.transform.rotation = Quaternion.Euler(Angle, 0, 0);
-                maincam.SetActive(true);
-                viewcam.SetActive(false);
             }
         }
-        else power = GameObject.Find("RightHand Controller").GetComponent<PlayerInput>().power;
+        else
+        {
+            power = GameObject.Find("RightHand Controller").GetComponent<PlayerInput>().power;
+        }
     }
     void OnCollisionEnter(Collision other)
     {

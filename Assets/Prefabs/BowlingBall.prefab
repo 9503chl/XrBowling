@@ -22,7 +22,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &792830561661120423
 Transform:
   m_ObjectHideFlags: 0
@@ -242,7 +242,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43f9ea1e3d553b94386a5c75fc5ea019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewcam: {fileID: 7057740178787937639, guid: b20556bb16f8628458b67ce1b652ccca, type: 3}
+  mainCam: {fileID: 4307526488548261588, guid: 2dd74b7c0a757eb498ca775302f3b6dc, type: 3}
+  viewCamera: {fileID: 0}
   isMove: 0
   speed: 0
   Angle: 0
