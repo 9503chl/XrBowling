@@ -69,7 +69,6 @@ public class SpinNHover : MonoBehaviour
     {
         {
             if (other.transform.name == "BreakWall") GameObject.Find("Spawner").GetComponent<Ball>().isGone = true;
-            if (other.transform.tag == "Floor") GameObject.Find("Spawner").GetComponent<Ball>().isRoll = true;
         }
     }
     private void OnTriggerExit(Collider other)

@@ -26,6 +26,7 @@ public class XRInteraction : MonoBehaviour
             UI.SetActive(false); //ÄÑÁ®ÀÖÀ¸¸é ²ô±â
             isNext = true;
             if (Active1 == true) Panel1.SetActive(false);
+            GameObject.Find("Hand").SetActive(false);
         }
         if (other.transform.name == "Shoes")// ½Å¹ß±×·¦½Ã
         {
@@ -34,6 +35,7 @@ public class XRInteraction : MonoBehaviour
             isNext = true;
             if (Active1 == true) Panel1.SetActive(false);
             if (!isblack) isblack = true;
+            GameObject.Find("Hand").SetActive(false);
         }
         if (other.transform.name == "Pinp") //ÇÉ ±×·¦½Ã
         {

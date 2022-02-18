@@ -6,7 +6,6 @@ using UnityEngine;
 public class Accel : MonoBehaviour
 {
     [SerializeField]GameObject mainCam;
-    public GameObject viewCamera;
     float power;
     private Transform tr;
     public bool isMove = false;
@@ -18,8 +17,6 @@ public class Accel : MonoBehaviour
     void Awake()
     {
         tr = GetComponent<Transform>();
-        viewCamera = GameObject.Find("View Camera");
-        viewCamera.SetActive(false);
     }
     void FixedUpdate()
     {
@@ -28,10 +25,10 @@ public class Accel : MonoBehaviour
             if (!once) 
             {
                 mainCam.SetActive(false);
-                viewCamera.SetActive(true);
+                GameObject.Find("Spawner").GetComponent<Ball>().viewCamera.SetActive(true);
                 once = true;
             }
-            viewCamera.transform.position = gameObject.transform.position + new Vector3(0, 0.2f, -0.1f);
+            GameObject.Find("Spawner").GetComponent<Ball>().viewCamera.transform.position = gameObject.transform.position + new Vector3(0, 0.2f, -0.1f);
             time += Time.deltaTime; //움직인 시간
             Angle += 30;
             speed = power;
@@ -71,6 +68,7 @@ public class Accel : MonoBehaviour
         {
             isMove = true;
             GameObject.Find("RightHand Controller").GetComponent<PlayerInput>().isMove = true;
+            GameObject.Find("Spawner").GetComponent<Ball>().isRoll = true;
         }
     }
 }
