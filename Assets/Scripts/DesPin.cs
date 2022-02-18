@@ -19,7 +19,7 @@ public class DesPin : MonoBehaviour
             Destroy(other.gameObject, 0.2f);
             GameObject.Find("hall").GetComponent<Dump>().dumpCount = 0;
             GameObject.Find("hall2").GetComponent<Dump>().dumpCount = 0;
-            GameObject.Find("Spawner").GetComponent<Ball>().viewCamera.SetActive(false);
+            GameObject.Find("View Camera").SetActive(false);
         }
         else Destroy(other.gameObject);
     }

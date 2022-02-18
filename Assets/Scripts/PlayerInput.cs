@@ -46,7 +46,6 @@ public class PlayerInput : MonoBehaviour
             sphere.transform.position = mainCamera.transform.position;
             mat.color = InputColor;
             alpha1 += Time.deltaTime * 0.3f; //알파값 시간에 따라 증가
-            GameObject.Find("Hand").SetActive(false);
         }
         if (alpha1 >=1.0f) SceneManager.LoadScene("TitleScene");
     }

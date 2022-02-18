@@ -22,11 +22,11 @@ public class Ball : MonoBehaviour
             Invoke("Spawner1",4.5f);
             isGone = false; isRoll = false;
         }
-        if (isRoll) Invoke("SoundPlay", 0.05f);
-    }
-    void SoundPlay()
-    {
-        ballSound.Play();
+        if (isRoll)
+        {
+            ballSound.Play();
+            isRoll = false;
+        }
     }
     void Spawner1()
     {
