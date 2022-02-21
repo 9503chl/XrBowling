@@ -11,14 +11,14 @@ public class ScoreText : MonoBehaviour
 {
     [SerializeField] AudioSource textSound;
     Text uiText;
-    int count = 0;
+    public int count = 0;
     void Start()
     {
         uiText = GetComponent<Text>();
     }
     void FixedUpdate()
     {
-        if(count == 3)
+        if(count == 4)
         {
             GameObject.Find("Score").GetComponent<Score>().turnEnd = false;
             count = 0;
@@ -28,34 +28,41 @@ public class ScoreText : MonoBehaviour
             textSound.Play();
             if (gameObject.name == "ScoreBoard1")
             {
-                string str = "|";
+                string str = "";
                 for(int i =0; i<10; i++)
                 {
                     str += GameObject.Find("Score").GetComponent<Score>().PointNow[i,0];
-                    str += "|";
+                    //str += " ";
                 }
                 uiText.DOText(str, 1.5f);
                 count++;
             }
             else if (gameObject.name == "ScoreBoard2")
             {
-                string str = "|";
+                string str = "";
                 for (int i = 0; i < 10; i++)
                 {
                     str += GameObject.Find("Score").GetComponent<Score>().PointNow[i, 1];
-                    str += "|";
+                    //str += "";
                 }
                 uiText.DOText(str, 1.5f);
                 count++;
             }
             else if (gameObject.name == "ScoreBoard3") 
             {
-                string str = "|";
+                string str = "";
                 for (int i = 0; i < 10; i++)
                 {
                     str += GameObject.Find("Score").GetComponent<Score>().PointNow[i, 2];
-                    str += "|";
+                    //str += "";
                 }
+                uiText.DOText(str, 1.5f);
+                count++;
+            }
+            else if (gameObject.name == "ScoreBoard4")
+            {
+                string str = "";
+                str += GameObject.Find("Score").GetComponent<Score>().totalScore;
                 uiText.DOText(str, 1.5f);
                 count++;
             }

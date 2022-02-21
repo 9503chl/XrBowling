@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class DesPin : MonoBehaviour
 {
@@ -20,6 +22,8 @@ public class DesPin : MonoBehaviour
             GameObject.Find("hall").GetComponent<Dump>().dumpCount = 0;
             GameObject.Find("hall2").GetComponent<Dump>().dumpCount = 0;
             GameObject.Find("View Camera").SetActive(false);
+            GameObject.Find("ScoreTotal").GetComponent<SpriteRenderer>().DOColor(Color.white, 0.5f);
+            GameObject.FindWithTag("Score").GetComponent<Text>().DOColor(Color.black, 0.5f);
         }
         else Destroy(other.gameObject);
     }
