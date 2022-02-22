@@ -12,11 +12,11 @@ public class DoFade1 : MonoBehaviour
         {
             if(gameObject.tag == "Score")
             {
-                gameObject.GetComponent<Text>().DOFade(0, 7.5f);
+                gameObject.GetComponent<Text>().DOFade(0, 5.0f);
             }
             else
             {
-                gameObject.GetComponent<SpriteRenderer>().DOFade(0, 7.5f);
+                gameObject.GetComponent<SpriteRenderer>().DOFade(0, 5.0f);
             }
         }
     }
