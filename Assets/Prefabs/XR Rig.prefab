@@ -606,10 +606,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e8b119014f80cf428cc987b4df2d4d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UI: {fileID: 0}
   sphere: {fileID: 0}
   mainCamera: {fileID: 0}
   mat: {fileID: 0}
+  isNext: 0
   isLeft: 0
   isRight: 0
   isNormal: 0

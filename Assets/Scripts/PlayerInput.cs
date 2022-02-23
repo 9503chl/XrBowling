@@ -5,13 +5,12 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class PlayerInput : MonoBehaviour
 {
-    [SerializeField] GameObject UI;
     [SerializeField] GameObject sphere;
     [SerializeField] Camera mainCamera;
     [SerializeField] Material mat;
 
     float alpha1 = 0;
-    bool isNext = false;
+    public bool isNext = false;
     Color InputColor = new Color(0, 0, 0, 0);
     public bool isLeft = false;
     public bool isRight = false;
@@ -55,7 +54,9 @@ public class PlayerInput : MonoBehaviour
         if(other.transform.name == "Shoes")
         {
             Destroy(other.gameObject);
+            GameObject.Find("Hand").SetActive(false);
             isNext = true;
+
         }
     }
 }
