@@ -5,16 +5,16 @@ using UnityEngine.UI;
 using DG.Tweening;
 
 
-[RequireComponent(typeof(Text))]
+[RequireComponent(typeof(TextMesh))]
 
 public class ScoreText : MonoBehaviour
 {
     [SerializeField] AudioSource textSound;
-    Text uiText;
+    TextMesh uiText;
     public int count = 0;
     void Start()
     {
-        uiText = GetComponent<Text>();
+        uiText = GetComponent<TextMesh>();
     }
     void FixedUpdate()
     {
@@ -31,10 +31,9 @@ public class ScoreText : MonoBehaviour
                 string str = "";
                 for(int i =0; i<10; i++)
                 {
-                    str += GameObject.Find("Score").GetComponent<Score>().PointNow[i,0];
-                    //str += " ";
+                    str += GameObject.Find("Score").GetComponent<Score>().PointNow[i, 0];
                 }
-                uiText.DOText(str, 1.5f);
+                uiText.text = string.Format(str);
                 count++;
             }
             else if (gameObject.name == "ScoreBoard2")
@@ -43,9 +42,8 @@ public class ScoreText : MonoBehaviour
                 for (int i = 0; i < 10; i++)
                 {
                     str += GameObject.Find("Score").GetComponent<Score>().PointNow[i, 1];
-                    //str += "";
                 }
-                uiText.DOText(str, 1.5f);
+                uiText.text = string.Format(str);
                 count++;
             }
             else if (gameObject.name == "ScoreBoard3") 
@@ -54,16 +52,15 @@ public class ScoreText : MonoBehaviour
                 for (int i = 0; i < 10; i++)
                 {
                     str += GameObject.Find("Score").GetComponent<Score>().PointNow[i, 2];
-                    //str += "";
                 }
-                uiText.DOText(str, 1.5f);
+                uiText.text = string.Format(str);
                 count++;
             }
             else if (gameObject.name == "ScoreBoard4")
             {
                 string str = "";
                 str += GameObject.Find("Score").GetComponent<Score>().totalScore;
-                uiText.DOText(str, 1.5f);
+                uiText.text = string.Format(str);
                 count++;
             }
         }
