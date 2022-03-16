@@ -57,6 +57,7 @@ public class TitleDoTween : MonoBehaviour
 
     void doTween()
     {
+        transform.DOScale(new Vector3(1,1,1), 0.5f);
         transform.DOMoveZ((transform.position.x + 200), 0.2f);
         Invoke("Disabler", 0.2f);
         shotGunSound.Play();

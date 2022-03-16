@@ -29,6 +29,7 @@ public class Accel : MonoBehaviour
                 once = true;
             }
             GameObject.Find("Spawner").GetComponent<Ball>().viewCamera.transform.position = gameObject.transform.position + new Vector3(0, 0.2f, -0.1f);
+            GameObject.Find("Main Camera").transform.rotation = Quaternion.Euler(0,0,0);
             time += Time.deltaTime; //움직인 시간
             Angle += 30;
             speed = power;

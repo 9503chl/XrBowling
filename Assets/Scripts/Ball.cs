@@ -16,8 +16,6 @@ public class Ball : MonoBehaviour
     }
     private void Update()
     {
-        Mathf.Clamp(viewCamera.transform.rotation.y, 0, 0);
-        Mathf.Clamp(viewCamera.transform.rotation.z, 0, 0);
         if (isGone) //공이랑 breakwall이 충돌시
         {
             ballSound.Stop();

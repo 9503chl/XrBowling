@@ -7,7 +7,9 @@ public class PlayerInput : MonoBehaviour
 {
     [SerializeField] GameObject sphere;
     [SerializeField] Camera mainCamera;
+    [SerializeField] Camera viewCamera;
     [SerializeField] Material mat;
+
 
     float alpha1 = 0;
     public bool isNext = false;
@@ -55,6 +57,7 @@ public class PlayerInput : MonoBehaviour
         {
             Destroy(other.gameObject);
             GameObject.Find("Hand").SetActive(false);
+            Destroy(viewCamera);
             isNext = true;
 
         }
